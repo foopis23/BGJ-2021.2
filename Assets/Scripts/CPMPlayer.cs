@@ -89,6 +89,8 @@ public class CPMPlayer : MonoBehaviour
     // Player commands, stores wish commands that the player asks for (Forward, back, jump, etc)
     private Cmd _cmd;
 
+    private Player player;
+
     private void Start()
     {
         // Hide the cursor
@@ -109,10 +111,17 @@ public class CPMPlayer : MonoBehaviour
             transform.position.z);
 
         _controller = GetComponent<CharacterController>();
+
+        player = GetComponent<Player>();
     }
 
     private void Update()
     {
+        if(!player.IsAlive)
+        {
+            return;
+        }
+
         // Do FPS calculation
         frameCount++;
         dt += Time.deltaTime;

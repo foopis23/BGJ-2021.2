@@ -75,7 +75,7 @@ public class Projectile : MonoBehaviour
                         break;
 
                     case "Player":
-                        EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this});
+                        EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this Player = hit.collider.gameObject.GetComponent<Player>()});
                         // TODO: damage player (once player implemented)
                         // TODO: also the thing with not hitging twihuchceceeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                         if(--piercesLeft == 0)
@@ -132,7 +132,7 @@ public class OnHitEnemyContext : EventContext
 public class OnHitPlayerContext : EventContext
 {
     public Projectile Projectile;
-    //public Player Player; 
+    public Player Player; 
 }
 
 public class OnExpireContext : EventContext
