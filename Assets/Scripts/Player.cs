@@ -6,7 +6,7 @@ public class Player : LivingEntity
 {
     void Start()
     {
-        Health = MaxHealth;
+        Heal(MaxHealth);
     }
 
     void Update()
