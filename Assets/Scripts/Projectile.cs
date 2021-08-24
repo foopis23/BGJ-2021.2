@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour
                     case "Level":
                         transform.forward = Vector3.Reflect(transform.forward, hit.normal);
                         EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
-                        if(--bouncesLeft == 0)
+                        if(bouncesLeft-- == 0)
                         {
                             Expire(true);
                             return;
@@ -66,7 +66,7 @@ public class Projectile : MonoBehaviour
                         EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
                         // TODO: damage enemy (once enemy implemented)
                         // TODO (also once enemy implemented): check to make sure we dont accidentally apply this twice
-                        if(--piercesLeft == 0)
+                        if(piercesLeft-- == 0)
                         {
                             Expire(true);
                             return;
@@ -78,7 +78,7 @@ public class Projectile : MonoBehaviour
                         EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
                         // TODO: damage player (once player implemented)
                         // TODO: also the thing with not hitging twihuchceceeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        if(--piercesLeft == 0)
+                        if(piercesLeft-- == 0)
                         {
                             Expire(true);
                             return;
