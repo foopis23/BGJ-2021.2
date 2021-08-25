@@ -4,9 +4,12 @@ using UnityEngine;
 
 public abstract class LivingEntity : MonoBehaviour
 {
-    public float Health;
+    // editor fields
     public float MaxHealth;
     public bool IsAlive = true;
+
+    // public properties
+    public float Health { get; private set; }
 
     public void Damage(float damage)
     {
@@ -19,6 +22,14 @@ public abstract class LivingEntity : MonoBehaviour
                 IsAlive = false;
                 OnDeath();
             }
+        }
+    }
+
+    public void Heal(float healing)
+    {
+        if(IsAlive)
+        {
+            Health = Mathf.Min(MaxHealth, Health + healing);
         }
     }
 
