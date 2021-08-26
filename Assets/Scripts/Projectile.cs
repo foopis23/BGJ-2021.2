@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
             hitSuccess = Physics.Raycast(projectileTransform.position, projectileTransform.forward, out var hit, targetDistance) && hit.distance < range - _distanceTraveled;
             if (!hitSuccess) continue;
             var hitObject = hit.collider.gameObject;
-            if(hitObject.layer == SortingLayer.NameToID("Level"))
+            if(hitObject.layer == LayerMask.NameToLayer("Level"))
             {
                 projectileTransform.forward = Vector3.Reflect(projectileTransform.forward, hit.normal);
                 EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour
                 // Clear hit set so that after bounce enemy could be hit again
                 _hitEnemies.Clear();
             }
-            else if(hitObject.layer == SortingLayer.NameToID("Enemy"))
+            else if(hitObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
                     
@@ -75,7 +75,7 @@ public class Projectile : MonoBehaviour
                     return;
                 }
             }
-            else if(hitObject.layer == SortingLayer.NameToID("Player"))
+            else if(hitObject.layer == LayerMask.NameToLayer("Player"))
             {
                 EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
                     

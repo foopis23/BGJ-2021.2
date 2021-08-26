@@ -5,16 +5,19 @@ namespace Weapons
 {
     public class Pistol : MonoBehaviour, IWeapon
     {
+        public int maxAmmo = 6; // How full the mag can be
+        public float fireRate = 0.46f; // time between bullets
+        public float reloadTime = 3.883f; // how long it takes to reload gun (animation length)
         public GameObject bulletPrefab;
-            
-        private const float FireRate = 0.46f; // time between bullets
-        private float _lastFire = 0.0f; // time the gun was fired last
-        
-        private const int MaxAmmo = 6; // How full the mag can be
-        private float _currentAmmo = 6; // how much ammo currently
 
-        private const float ReloadTime = 3.883f; // how long it takes to reload gun (animation length)
+        private float _currentAmmo; // how much ammo currently
+        private float _lastFire = 0.0f; // time the gun was fired last
         private float _lastReload = 0.0f; // last time the gun was reloaded
+
+        void Start()
+        {
+            _currentAmmo = maxAmmo;
+        }
 
         public bool Fire(Transform spawnPoint)
         {
@@ -31,7 +34,7 @@ namespace Weapons
         {
             if (!CanReload()) return false;
             _lastReload = Time.time;
-            _currentAmmo = MaxAmmo;
+            _currentAmmo = maxAmmo;
             return true;
         }
 
@@ -42,17 +45,17 @@ namespace Weapons
 
         private bool CanReload()
         {
-            return _currentAmmo < MaxAmmo && !IsReloading() && !IsShooting();
+            return _currentAmmo < maxAmmo && !IsReloading() && !IsShooting();
         }
 
         private bool IsReloading()
         {
-            return Time.time - _lastReload < ReloadTime;
+            return Time.time - _lastReload < reloadTime;
         }
 
         private bool IsShooting()
         {
-            return Time.time - _lastFire < FireRate;
+            return Time.time - _lastFire < fireRate;
         }
     }
 }

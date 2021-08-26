@@ -5,46 +5,35 @@ using UnityEngine.AI;
 
 public class Enemy : LivingEntity
 {
-    // editor fields
-    public LayerMask ViewLayerMask;
-
     // private fields
-    private NavMeshAgent navMeshAgent;
-    private SphereCollider sphereCollider;
-    private GameObject aggroTarget;
+    private NavMeshAgent _navMeshAgent;
+
+    // public properties
+    public GameObject aggroTarget { get; set; }
 
     void Start()
     {
         Heal(MaxHealth);
         aggroTarget = null;
 
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        sphereCollider = GetComponent<SphereCollider>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if(aggroTarget != null)
+        if(IsAlive)
         {
-            navMeshAgent.SetDestination(aggroTarget.transform.position);
+            if(aggroTarget != null)
+            {
+                _navMeshAgent.SetDestination(aggroTarget.transform.position);
+            }
+
+            // TODO: attack bois
         }
     }
 
     protected override void OnDeath()
     {
-        navMeshAgent.enabled = false;
-    }
-
-    void OnTriggerStay(Collider col)
-    {
-        if(col.tag == "Player" && col.gameObject != aggroTarget && (aggroTarget == null || Vector3.Distance(transform.position, col.gameObject.transform.position) < Vector3.Distance(transform.position, aggroTarget.transform.position)))
-        {
-            RaycastHit hit;
-            Physics.Raycast(transform.TransformPoint(sphereCollider.center), col.gameObject.transform.position - transform.TransformPoint(sphereCollider.center), out hit, sphereCollider.radius + 1);
-            if(hit.collider == col)
-            {
-                aggroTarget = col.gameObject;
-            }
-        }
+        _navMeshAgent.enabled = false;
     }
 }
