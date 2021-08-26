@@ -1,6 +1,6 @@
 ﻿namespace Modifiers
 {
-    public class BombDefusalEventModifier : AbstractEventModifier<OnFireContext>
+    public class BombDefusal : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {

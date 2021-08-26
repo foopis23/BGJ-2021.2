@@ -1,10 +1,10 @@
 ﻿namespace Modifiers
 {
-    public class StoppingPowerEventModifier : AbstractEventModifier<OnFireContext>
+    public class Sluggard : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {
-            e.Projectile.pierces -= 4;
+            throw new System.NotImplementedException();
         }
 
         protected override void OnFailure(OnFireContext e)
