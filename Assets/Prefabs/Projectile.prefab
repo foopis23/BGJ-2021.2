@@ -126,11 +126,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  speed: 30
+  speed: 50
   minSpeed: 1
-  range: 10000
+  range: 100
   minRange: 10
-  bounces: 1
+  bounces: 100
   minBounces: 0
   pierces: 0
   minPierces: 0
