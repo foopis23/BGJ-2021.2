@@ -46,51 +46,46 @@ public class Projectile : MonoBehaviour
         bool hitSuccess;
         do
         {
-            var transform1 = transform;
-            hitSuccess = Physics.Raycast(transform1.position, transform1.forward, out var hit, targetDistance) && hit.distance < range - _distanceTraveled;
+            hitSuccess = Physics.Raycast(projectileTransform.position, projectileTransform.forward, out var hit, targetDistance) && hit.distance < range - _distanceTraveled;
             if (!hitSuccess) continue;
-            switch(hit.collider.tag)
+            var hitObject = hit.collider.gameObject;
+            if(hitObject.layer == SortingLayer.NameToID("Level"))
             {
-                case "Level":
-                    transform.forward = Vector3.Reflect(transform.forward, hit.normal);
-                    EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
+                projectileTransform.forward = Vector3.Reflect(projectileTransform.forward, hit.normal);
+                EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
+                
+                if(_bouncesLeft-- == 0)
+                {
+                    Expire(true);
+                    return;
+                }
+                
+                // Clear hit set so that after bounce enemy could be hit again
+                _hitEnemies.Clear();
+            }
+            else if(hitObject.layer == SortingLayer.NameToID("Enemy"))
+            {
+                EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
                     
-                    if(_bouncesLeft-- == 0)
-                    {
-                        Expire(true);
-                        return;
-                    }
+                DamageEntity(hit.collider.gameObject);
+
+                if(_piercesLeft-- == 0)
+                {
+                    Expire(true);
+                    return;
+                }
+            }
+            else if(hitObject.layer == SortingLayer.NameToID("Player"))
+            {
+                EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
                     
-                    // Clear hit set so that after bounce enemy could be hit again
-                    _hitEnemies.Clear();
+                DamageEntity(hit.collider.gameObject);
 
-                    break;
-
-                case "Enemy":
-                    EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
-                        
-                    DamageEntity(hit.collider.gameObject);
-
-                    if(_piercesLeft-- == 0)
-                    {
-                        Expire(true);
-                        return;
-                    }
-
-                    break;
-
-                case "Player":
-                    EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
-                        
-                    DamageEntity(hit.collider.gameObject);
-
-                    if(_piercesLeft-- == 0)
-                    {
-                        Expire(true);
-                        return;
-                    }
-
-                    break;
+                if(_piercesLeft-- == 0)
+                {
+                    Expire(true);
+                    return;
+                }
             }
 
             projectileTransform.position += projectileTransform.forward * hit.distance;
