@@ -5,6 +5,7 @@
         protected override void OnSuccess(OnFireContext e)
         {
             // TODO: Change bullet Riccochet count
+            e.Projectile.bounces++;
             throw new System.NotImplementedException();
         }
 

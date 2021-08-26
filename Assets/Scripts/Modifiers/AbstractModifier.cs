@@ -45,10 +45,4 @@ namespace Modifiers
         protected abstract void OnSuccess(T e);
         protected abstract void OnFailure(T e);
     }
-
-    public class OnFireContext : EventContext {}
-    public class OnHitEnemyContext : EventContext {}
-    public class OnHitWallContext : EventContext {}
-    public class OnHitSelfContext : EventContext {}
-    public class OnExpireContext : EventContext {}
 }
