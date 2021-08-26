@@ -125,13 +125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf9f97bc28dc9544b20a5f6ee46de5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
-  Speed: 30
-  MinSpeed: 1
-  Range: 10000
-  MinRange: 10
-  Bounces: 0
-  MinBounces: 0
-  Pierces: 0
-  MinPierces: 0
-  IsGrapeShot: 0
+  damage: 10
+  speed: 50
+  minSpeed: 1
+  range: 100
+  minRange: 10
+  bounces: 100
+  minBounces: 0
+  pierces: 0
+  minPierces: 0
