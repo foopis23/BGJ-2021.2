@@ -1,11 +1,11 @@
 ﻿namespace Modifiers
 {
-    public class Sluggard : AbstractEventFilterModifier<PlayerMoveSpeedFilterContext>
+    public class LegDay : AbstractEventFilterModifier<PlayerMoveSpeedFilterContext>
     {
         private const float SpeedPercent = 0.2f;
         protected override PlayerMoveSpeedFilterContext OnSuccess(PlayerMoveSpeedFilterContext e)
         {
-            e.MoveSpeed -= e.BaseMoveSpeed * SpeedPercent;
+            e.MoveSpeed += e.BaseMoveSpeed * SpeedPercent;
             return e;
         }
 
