@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: ac47e09e84b763b4bb79d51ee6e775df
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 1486154517777177297
+    second: Cube.004|Cube.003 Shoot
+  - first:
+      74: -692317337669056001
+    second: Cube.004|Cylinder.001Action
+  - first:
+      74: 5318880017086280520
+    second: Cube.004|Cylinder.002 Reload
+  - first:
+      74: -2681203811233803972
+    second: Cube.004|Cylinder.003 Reload
+  - first:
+      74: -2101769324714915431
+    second: Cube.004|Cylinder.004Action
+  - first:
+      74: -7767183914049675480
+    second: Cube.004|Cylinder.005Action
+  - first:
+      74: -5366355968055875768
+    second: Cube.004|Cylinder.006 Reload
+  - first:
+      74: 3160644793607017610
+    second: Cube.004|Cylinder.007 Shoot
+  - first:
+      74: 8328476894831203934
+    second: Cube.004|Cylinder.012Action
+  - first:
+      74: -4408386460264285491
+    second: Cube.004|Cylinder.016 Equip
+  - first:
+      74: -8215612538954730486
+    second: Cube.004|CylinderReload
+  - first:
+      74: -5761548629017945962
+    second: Cube.004|Epic Reload.001
+  - first:
+      74: 5206363075619063530
+    second: Cube.004|Reload
+  - first:
+      74: 7896495134229223632
+    second: Cylinder.016|Cube.003 Shoot
+  - first:
+      74: -4537292548489170737
+    second: Cylinder.016|Cylinder.001Action
+  - first:
+      74: -8380220330332664172
+    second: Cylinder.016|Cylinder.002 Reload
+  - first:
+      74: -3529345354128753032
+    second: Cylinder.016|Cylinder.003 Reload
+  - first:
+      74: -4269380050040858209
+    second: Cylinder.016|Cylinder.004Action
+  - first:
+      74: -2584838344025767237
+    second: Cylinder.016|Cylinder.005Action
+  - first:
+      74: -6475809813099562911
+    second: Cylinder.016|Cylinder.006 Reload
+  - first:
+      74: 3538985995790826410
+    second: Cylinder.016|Cylinder.007 Shoot
+  - first:
+      74: -817800795197546758
+    second: Cylinder.016|Cylinder.012Action
+  - first:
+      74: -7752905295456261710
+    second: Cylinder.016|Cylinder.016 Equip
+  - first:
+      74: 4418707377119890380
+    second: Cylinder.016|CylinderReload
+  - first:
+      74: -4594584038854256914
+    second: Cylinder.016|Epic Reload.001
+  - first:
+      74: 5457517893688481373
+    second: Cylinder.016|Reload
+  - first:
+      74: 5695768303067191384
+    second: Cube.005|Cube.003 Shoot
+  - first:
+      74: 9178084327148525696
+    second: Cube.005|Cylinder.001Action
+  - first:
+      74: 1149048836590177110
+    second: Cube.005|Cylinder.002 Reload
+  - first:
+      74: 7180189190031441224
+    second: Cube.005|Cylinder.003 Reload
+  - first:
+      74: 966156449161195044
+    second: Cube.005|Cylinder.004Action
+  - first:
+      74: 3776068756947302759
+    second: Cube.005|Cylinder.005Action
+  - first:
+      74: -14895228993487587
+    second: Cube.005|Cylinder.006 Reload
+  - first:
+      74: 1361754406928059347
+    second: Cube.005|Cylinder.007 Shoot
+  - first:
+      74: -5012387284981596912
+    second: Cube.005|Cylinder.012Action
+  - first:
+      74: -2304094134039695817
+    second: Cube.005|Cylinder.016 Equip
+  - first:
+      74: 5038307653864695395
+    second: Cube.005|CylinderReload
+  - first:
+      74: 5905464619297507216
+    second: Cube.005|Epic Reload.001
+  - first:
+      74: 6396049630519174136
+    second: Cube.005|Reload
+  - first:
+      74: 5453675680322790764
+    second: Huesos Mano.004|Cube.003 Shoot
+  - first:
+      74: 8979508736983537152
+    second: Huesos Mano.004|Cylinder.001Action
+  - first:
+      74: 3348492988386595149
+    second: Huesos Mano.004|Cylinder.002 Reload
+  - first:
+      74: -3627442554116475966
+    second: Huesos Mano.004|Cylinder.003 Reload
+  - first:
+      74: -8177741127068804411
+    second: Huesos Mano.004|Cylinder.004Action
+  - first:
+      74: -8108907748625851735
+    second: Huesos Mano.004|Cylinder.005Action
+  - first:
+      74: 1694824200025069843
+    second: Huesos Mano.004|Cylinder.006 Reload
+  - first:
+      74: -1457768241192874689
+    second: Huesos Mano.004|Cylinder.007 Shoot
+  - first:
+      74: 7432421426440830064
+    second: Huesos Mano.004|Cylinder.012Action
+  - first:
+      74: -3013153716369359722
+    second: Huesos Mano.004|Cylinder.016 Equip
+  - first:
+      74: -4628749556345265967
+    second: Huesos Mano.004|CylinderReload
+  - first:
+      74: 5666078490147204168
+    second: Huesos Mano.004|Epic Reload
+  - first:
+      74: -4640902511975221230
+    second: Huesos Mano.004|Epic Reload Hand 2
+  - first:
+      74: 2244432613646967668
+    second: Huesos Mano.004|Epic Reload.001
+  - first:
+      74: -4339903253761429007
+    second: Huesos Mano.004|Left Hand Equip
+  - first:
+      74: 840000414972304479
+    second: Huesos Mano.004|Mano Cer
+  - first:
+      74: 2646476428651043459
+    second: Huesos Mano.004|Muneca Cer y Abi
+  - first:
+      74: -747782089235351247
+    second: Huesos Mano.004|Muneca Lado Alto
+  - first:
+      74: -3700243097946847976
+    second: Huesos Mano.004|Muneca Lado Bajo
+  - first:
+      74: -7020610269763912408
+    second: Huesos Mano.004|Reload
+  - first:
+      74: 7589448035445654510
+    second: Huesos Mano.004|Right Hand  Equip
+  - first:
+      74: -5055980298880676464
+    second: Huesos Mano.004|Right Hand Shoot
+  - first:
+      74: -7977384210913775027
+    second: Huesos Mano.005|Cube.003 Shoot
+  - first:
+      74: 7069055594701213719
+    second: Huesos Mano.005|Cylinder.001Action
+  - first:
+      74: 7928800663011934177
+    second: Huesos Mano.005|Cylinder.002 Reload
+  - first:
+      74: 781816057723142524
+    second: Huesos Mano.005|Cylinder.003 Reload
+  - first:
+      74: -5194497347596056982
+    second: Huesos Mano.005|Cylinder.004Action
+  - first:
+      74: -8298478149949807954
+    second: Huesos Mano.005|Cylinder.005Action
+  - first:
+      74: 3012668391295989904
+    second: Huesos Mano.005|Cylinder.006 Reload
+  - first:
+      74: 920152984775601986
+    second: Huesos Mano.005|Cylinder.007 Shoot
+  - first:
+      74: -2933173215071931649
+    second: Huesos Mano.005|Cylinder.012Action
+  - first:
+      74: 316427749169444286
+    second: Huesos Mano.005|Cylinder.016 Equip
+  - first:
+      74: -2748089340010254243
+    second: Huesos Mano.005|CylinderReload
+  - first:
+      74: 5091562560648098683
+    second: Huesos Mano.005|Epic Reload
+  - first:
+      74: 5120141181905633555
+    second: Huesos Mano.005|Epic Reload Hand 2
+  - first:
+      74: -6008502755605205337
+    second: Huesos Mano.005|Epic Reload.001
+  - first:
+      74: -1433909079332925407
+    second: Huesos Mano.005|Left Hand Equip
+  - first:
+      74: 3677717548115874766
+    second: Huesos Mano.005|Mano Cer
+  - first:
+      74: 2408342014249559784
+    second: Huesos Mano.005|Muneca Cer y Abi
+  - first:
+      74: 4444802341349382737
+    second: Huesos Mano.005|Muneca Lado Alto
+  - first:
+      74: 8705815713557986609
+    second: Huesos Mano.005|Muneca Lado Bajo
+  - first:
+      74: -1812624286385446843
+    second: Huesos Mano.005|Reload
+  - first:
+      74: -4551990331121673660
+    second: Huesos Mano.005|Right Hand  Equip
+  - first:
+      74: -1967543591090143894
+    second: Huesos Mano.005|Right Hand Shoot
+  - first:
+      74: 1613560355885007433
+    second: Cylinder.017|Cube.003 Shoot
+  - first:
+      74: 5786211114516627558
+    second: Cylinder.017|Cylinder.001Action
+  - first:
+      74: 163339657705008323
+    second: Cylinder.017|Cylinder.002 Reload
+  - first:
+      74: 5725772137990932165
+    second: Cylinder.017|Cylinder.003 Reload
+  - first:
+      74: 3590678624745863486
+    second: Cylinder.017|Cylinder.004Action
+  - first:
+      74: 6781115441040570380
+    second: Cylinder.017|Cylinder.005Action
+  - first:
+      74: -2281918168808514932
+    second: Cylinder.017|Cylinder.006 Reload
+  - first:
+      74: 4256114716636613229
+    second: Cylinder.017|Cylinder.007 Shoot
+  - first:
+      74: -8062975684200310122
+    second: Cylinder.017|Cylinder.012Action
+  - first:
+      74: -5384670256507681923
+    second: Cylinder.017|Cylinder.016 Equip
+  - first:
+      74: 149549290341579832
+    second: Cylinder.017|CylinderReload
+  - first:
+      74: -2477239853849779171
+    second: Cylinder.017|Epic Reload.001
+  - first:
+      74: -3857293645896340621
+    second: Cylinder.017|Reload
+  - first:
+      74: -6500697367198990572
+    second: Cylinder.018|Cube.003 Shoot
+  - first:
+      74: 2747517227611428090
+    second: Cylinder.018|Cylinder.001Action
+  - first:
+      74: 1922447716402062825
+    second: Cylinder.018|Cylinder.002 Reload
+  - first:
+      74: -8437077969026833357
+    second: Cylinder.018|Cylinder.003 Reload
+  - first:
+      74: -8200564915067091244
+    second: Cylinder.018|Cylinder.004Action
+  - first:
+      74: 7379520787994040464
+    second: Cylinder.018|Cylinder.005Action
+  - first:
+      74: 2091265283731680699
+    second: Cylinder.018|Cylinder.006 Reload
+  - first:
+      74: -3225838645464726912
+    second: Cylinder.018|Cylinder.007 Shoot
+  - first:
+      74: -6679335933057210729
+    second: Cylinder.018|Cylinder.012Action
+  - first:
+      74: -7327031483030535139
+    second: Cylinder.018|Cylinder.016 Equip
+  - first:
+      74: 4170969749150901485
+    second: Cylinder.018|CylinderReload
+  - first:
+      74: -8138675872989253405
+    second: Cylinder.018|Epic Reload.001
+  - first:
+      74: 7224868008664132378
+    second: Cylinder.018|Reload
+  - first:
+      74: -8302790281751206533
+    second: Cylinder.019|Cube.003 Shoot
+  - first:
+      74: 6119684343313729195
+    second: Cylinder.019|Cylinder.001Action
+  - first:
+      74: 3542323464663342265
+    second: Cylinder.019|Cylinder.002 Reload
+  - first:
+      74: 5454044304589634104
+    second: Cylinder.019|Cylinder.003 Reload
+  - first:
+      74: 2308561858246348463
+    second: Cylinder.019|Cylinder.004Action
+  - first:
+      74: -7877014859071512543
+    second: Cylinder.019|Cylinder.005Action
+  - first:
+      74: 2676162686894179662
+    second: Cylinder.019|Cylinder.006 Reload
+  - first:
+      74: -3326254021026409478
+    second: Cylinder.019|Cylinder.007 Shoot
+  - first:
+      74: -7213327189119631801
+    second: Cylinder.019|Cylinder.012Action
+  - first:
+      74: -2108067168874767908
+    second: Cylinder.019|Cylinder.016 Equip
+  - first:
+      74: -8836056118526572700
+    second: Cylinder.019|CylinderReload
+  - first:
+      74: 6912848612738798937
+    second: Cylinder.019|Epic Reload.001
+  - first:
+      74: -7646870544284202817
+    second: Cylinder.019|Reload
+  - first:
+      74: -7378931815756250004
+    second: Cylinder.020|Cube.003 Shoot
+  - first:
+      74: 103382736618617771
+    second: Cylinder.020|Cylinder.001Action
+  - first:
+      74: 564104832115076287
+    second: Cylinder.020|Cylinder.002 Reload
+  - first:
+      74: -6864862902292970496
+    second: Cylinder.020|Cylinder.003 Reload
+  - first:
+      74: -1877259035511222719
+    second: Cylinder.020|Cylinder.004Action
+  - first:
+      74: 6521647025072073313
+    second: Cylinder.020|Cylinder.005Action
+  - first:
+      74: -2027681327859732774
+    second: Cylinder.020|Cylinder.006 Reload
+  - first:
+      74: -6630570969676977015
+    second: Cylinder.020|Cylinder.007 Shoot
+  - first:
+      74: 1546419873849743411
+    second: Cylinder.020|Cylinder.012Action
+  - first:
+      74: -2862549381599649894
+    second: Cylinder.020|Cylinder.016 Equip
+  - first:
+      74: 1913548560017204571
+    second: Cylinder.020|CylinderReload
+  - first:
+      74: 8496493037348893238
+    second: Cylinder.020|Epic Reload.001
+  - first:
+      74: -2016270403476559612
+    second: Cylinder.020|Reload
+  - first:
+      74: -8306310627856170691
+    second: Cylinder.021|Cube.003 Shoot
+  - first:
+      74: 5205075559241130374
+    second: Cylinder.021|Cylinder.001Action
+  - first:
+      74: 8434705413401142128
+    second: Cylinder.021|Cylinder.002 Reload
+  - first:
+      74: -4811734506157245657
+    second: Cylinder.021|Cylinder.003 Reload
+  - first:
+      74: -1765488552925949429
+    second: Cylinder.021|Cylinder.004Action
+  - first:
+      74: -8345668572886299546
+    second: Cylinder.021|Cylinder.005Action
+  - first:
+      74: -1222458147859841711
+    second: Cylinder.021|Cylinder.006 Reload
+  - first:
+      74: 2700440223509927417
+    second: Cylinder.021|Cylinder.007 Shoot
+  - first:
+      74: 4642304573976932673
+    second: Cylinder.021|Cylinder.012Action
+  - first:
+      74: 5094647177363872390
+    second: Cylinder.021|Cylinder.016 Equip
+  - first:
+      74: 5097253711059678525
+    second: Cylinder.021|CylinderReload
+  - first:
+      74: -3778050669497988852
+    second: Cylinder.021|Epic Reload.001
+  - first:
+      74: -3369590328976151001
+    second: Cylinder.021|Reload
+  - first:
+      74: -7670576546047488318
+    second: Cylinder.022|Cube.003 Shoot
+  - first:
+      74: 2475851447466686659
+    second: Cylinder.022|Cylinder.001Action
+  - first:
+      74: -4860689606551319550
+    second: Cylinder.022|Cylinder.002 Reload
+  - first:
+      74: 4835311115723337004
+    second: Cylinder.022|Cylinder.003 Reload
+  - first:
+      74: -8775132382511848163
+    second: Cylinder.022|Cylinder.004Action
+  - first:
+      74: -5821412885644742373
+    second: Cylinder.022|Cylinder.005Action
+  - first:
+      74: -8467990113979351751
+    second: Cylinder.022|Cylinder.006 Reload
+  - first:
+      74: 3546155835436657397
+    second: Cylinder.022|Cylinder.007 Shoot
+  - first:
+      74: -2691084279324793234
+    second: Cylinder.022|Cylinder.012Action
+  - first:
+      74: -3939411464841210638
+    second: Cylinder.022|Cylinder.016 Equip
+  - first:
+      74: 4221262028161373130
+    second: Cylinder.022|CylinderReload
+  - first:
+      74: -842226143067700061
+    second: Cylinder.022|Epic Reload.001
+  - first:
+      74: -3703664941125970520
+    second: Cylinder.022|Reload
+  - first:
+      74: -2148419294193102505
+    second: Cylinder.023|Cube.003 Shoot
+  - first:
+      74: 6025781505310726212
+    second: Cylinder.023|Cylinder.001Action
+  - first:
+      74: 2147742335120447697
+    second: Cylinder.023|Cylinder.002 Reload
+  - first:
+      74: 5730310042470640601
+    second: Cylinder.023|Cylinder.003 Reload
+  - first:
+      74: 2935561823089077580
+    second: Cylinder.023|Cylinder.004Action
+  - first:
+      74: -8667616021497750006
+    second: Cylinder.023|Cylinder.005Action
+  - first:
+      74: -4355805269783811369
+    second: Cylinder.023|Cylinder.006 Reload
+  - first:
+      74: 6212222683495888606
+    second: Cylinder.023|Cylinder.007 Shoot
+  - first:
+      74: 7044122186342727093
+    second: Cylinder.023|Cylinder.012Action
+  - first:
+      74: 6877626146859806988
+    second: Cylinder.023|Cylinder.016 Equip
+  - first:
+      74: -8347420564692723423
+    second: Cylinder.023|CylinderReload
+  - first:
+      74: -1144345878242048494
+    second: Cylinder.023|Epic Reload.001
+  - first:
+      74: 4073166384236804589
+    second: Cylinder.023|Reload
+  - first:
+      74: -4598700992159680928
+    second: equip
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leather
+    second: {fileID: 2100000, guid: 641763e494509b94eb2f9157d126118b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 0a534b0e1d3433a458af3548b916fe46, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
