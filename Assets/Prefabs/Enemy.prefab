@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5733828356443494131}
   - component: {fileID: 5509131043555008641}
+  - component: {fileID: 2911424869933508924}
   m_Layer: 11
   m_Name: AI detection
   m_TagString: Untagged
@@ -44,6 +45,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &2911424869933508924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261085792578084889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2ea1fa62cce494f9c9e132867a861b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewLayerMask:
+    serializedVersion: 2
+    m_Bits: 262400
 --- !u!1 &3649290192566912914
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,9 +190,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 20
   IsAlive: 1
-  ViewLayerMask:
-    serializedVersion: 2
-    m_Bits: 262400
 --- !u!195 &3649290192713331920
 NavMeshAgent:
   m_ObjectHideFlags: 0
