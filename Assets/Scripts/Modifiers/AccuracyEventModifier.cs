@@ -1,6 +1,6 @@
 ﻿namespace Modifiers
 {
-    public class AccuracyModifier : AbstractModifier<OnFireContext>
+    public class AccuracyEventModifier : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {

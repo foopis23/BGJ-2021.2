@@ -1,10 +1,10 @@
 ﻿namespace Modifiers
 {
-    public class StoppingPowerModifier : AbstractModifier<OnFireContext>
+    public class BombDefusalEventModifier : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {
-            e.Projectile.pierces -= 4;
+            throw new System.NotImplementedException();
         }
 
         protected override void OnFailure(OnFireContext e)
@@ -12,5 +12,5 @@
             // TODO: Set this up with different pools for different event types
             throw new System.NotImplementedException();
         }
-    }
+    }   
 }

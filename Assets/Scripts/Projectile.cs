@@ -56,7 +56,6 @@ public class Projectile : MonoBehaviour
                 projectileTransform.forward = Vector3.Reflect(projectileTransform.forward, hit.normal);
                 EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
                 
-                Debug.Log($"{_totalBounces}/{bounces}");
                 if(_totalBounces++ >= bounces)
                 {
                     Expire(true);

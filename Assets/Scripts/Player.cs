@@ -13,8 +13,10 @@ public class Player : LivingEntity
     {
         Heal(MaxHealth);
         Inventory = new ModifierInventory(inventorySize);
-
-        Inventory.Equip(new Ricochet());
+        // Inventory.Equip(new Ricochet());
+        // Inventory.Equip(new GrapeShot());
+        
+        while (Inventory.Equip(new GrapeShot())) {}
     }
 
     void Update()

@@ -1,6 +1,6 @@
 ﻿namespace Modifiers
 {
-    public class Tnt : AbstractModifier<OnExpireContext>
+    public class Tnt : AbstractEventModifier<OnExpireContext>
     {
         protected override void OnSuccess(OnExpireContext e)
         {
