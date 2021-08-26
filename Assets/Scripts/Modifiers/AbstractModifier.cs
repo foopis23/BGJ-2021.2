@@ -26,7 +26,6 @@ namespace Modifiers
             if (Random.Range(0.0f, 1.0f) > Corruption) return;
             
             _instability = Mathf.Min(1.0f, _instability + 0.01f);
-            Debug.Log(_instability);
         }
 
         private void OnTrigger(T e)

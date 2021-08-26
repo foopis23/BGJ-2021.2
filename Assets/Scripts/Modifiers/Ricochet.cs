@@ -6,7 +6,7 @@ namespace Modifiers
     {
         protected override void OnSuccess(OnFireContext e)
         {
-            Debug.Log("ACTIVATED");
+            e.Projectile.bounces += 4;
         }
 
         protected override void OnFailure(OnFireContext e)
