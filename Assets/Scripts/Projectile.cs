@@ -20,17 +20,18 @@ public class Projectile : MonoBehaviour
 
     // Private Fields
     private float _distanceTraveled;
-    private int _bouncesLeft;
-    private int _piercesLeft;
+    private int _totalBounces;
+    private int _totalPierces;
     private HashSet<int> _hitEnemies;
 
     private void Start()
     {
         EventSystem.Current.FireEvent(new OnFireContext {Projectile = this});
         _distanceTraveled = 0;
-        _bouncesLeft = bounces;
-        _piercesLeft = pierces;
-        _hitEnemies = new HashSet<int>();
+        _totalBounces = 0;
+        _totalPierces = 0;
+        
+        _hitEnemies ??= new HashSet<int>();
     }
 
     private void FixedUpdate()
@@ -40,6 +41,7 @@ public class Projectile : MonoBehaviour
         if(bounces < minBounces) { bounces = minBounces; }
         if(pierces < minPierces) { pierces = minPierces; }
 
+        _hitEnemies ??= new HashSet<int>();
         var projectileTransform = transform;
 
         var targetDistance = speed * Time.fixedDeltaTime;
@@ -54,7 +56,8 @@ public class Projectile : MonoBehaviour
                 projectileTransform.forward = Vector3.Reflect(projectileTransform.forward, hit.normal);
                 EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
                 
-                if(_bouncesLeft-- == 0)
+                Debug.Log($"{_totalBounces}/{bounces}");
+                if(_totalBounces++ >= bounces)
                 {
                     Expire(true);
                     return;
@@ -69,7 +72,7 @@ public class Projectile : MonoBehaviour
                     
                 DamageEntity(hit.collider.gameObject);
 
-                if(_piercesLeft-- == 0)
+                if(_totalPierces++ >= pierces)
                 {
                     Expire(true);
                     return;
@@ -81,7 +84,7 @@ public class Projectile : MonoBehaviour
                     
                 DamageEntity(hit.collider.gameObject);
 
-                if(_piercesLeft-- == 0)
+                if(_totalPierces++ >= pierces)
                 {
                     Expire(true);
                     return;
