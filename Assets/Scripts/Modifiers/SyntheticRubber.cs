@@ -4,7 +4,7 @@
     {
         protected override void OnSuccess(OnFireContext e)
         {
-            throw new System.NotImplementedException();
+            e.Projectile.bounces -= 3;
         }
 
         protected override void OnFailure(OnFireContext e)
