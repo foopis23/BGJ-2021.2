@@ -18,7 +18,7 @@ public class Enemy : LivingEntity
     // public properties
     public GameObject aggroTarget { get; set; }
 
-    void Start()
+    private void Start()
     {
         InitEvent();
         Heal(MaxHealth);
@@ -27,21 +27,18 @@ public class Enemy : LivingEntity
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    private void Update()
     {
-        if(IsAlive)
-        {
-            if(aggroTarget != null)
-            {
-                _navMeshAgent.SetDestination(aggroTarget.transform.position);
+        if (!IsAlive) return;
+        if (aggroTarget == null) return;
+        
+        _navMeshAgent.SetDestination(aggroTarget.transform.position);
 
-                if(Vector3.Distance(transform.position, aggroTarget.transform.position) < attackRange)
-                {
-                    // TODO: play attack animation
-                    _attackTarget = aggroTarget;
-                    EventSystem.Current.CallbackAfter(Attack, (int) (attackDelay * 1000));
-                }
-            }
+        if(Vector3.Distance(transform.position, aggroTarget.transform.position) < attackRange)
+        {
+            // TODO: play attack animation
+            _attackTarget = aggroTarget;
+            EventSystem.Current.CallbackAfter(Attack, (int) (attackDelay * 1000));
         }
     }
 
@@ -52,14 +49,15 @@ public class Enemy : LivingEntity
 
     private void Attack()
     {
-        if(_attackTarget != null && Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)
+        if (!IsAlive) return;
+        if (_attackTarget == null ||
+            !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
+        
+        var livingEntity = _attackTarget.GetComponent<LivingEntity>();
+        if(livingEntity != null)
         {
-            var livingEntity = _attackTarget.GetComponent<LivingEntity>();
-            if(livingEntity != null)
-            {
-                livingEntity.Damage(attackDamage);
-                _attackTarget = null;
-            }
+            livingEntity.Damage(attackDamage);
+            _attackTarget = null;
         }
     }
 }

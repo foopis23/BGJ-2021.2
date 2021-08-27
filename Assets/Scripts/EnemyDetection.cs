@@ -26,13 +26,15 @@ public class EnemyDetection : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if(col.tag == "Player" && col.gameObject != _enemy.aggroTarget && (_enemy.aggroTarget == null || Vector3.Distance(transform.position, col.gameObject.transform.position) < Vector3.Distance(transform.position, _enemy.aggroTarget.transform.position)))
+        if (!_enemy.IsAlive) return;
+        if (!col.CompareTag("Player") || col.gameObject == _enemy.aggroTarget || (_enemy.aggroTarget != null &&
+            !(Vector3.Distance(transform.position, col.gameObject.transform.position) <
+              Vector3.Distance(transform.position, _enemy.aggroTarget.transform.position)))) return;
+        
+        Physics.Raycast(transform.TransformPoint(_detectionCollider.center), col.gameObject.transform.position - transform.TransformPoint(_detectionCollider.center), out var hit, _detectionCollider.radius + 1);
+        if(hit.collider == col)
         {
-            Physics.Raycast(transform.TransformPoint(_detectionCollider.center), col.gameObject.transform.position - transform.TransformPoint(_detectionCollider.center), out var hit, _detectionCollider.radius + 1);
-            if(hit.collider == col)
-            {
-                _enemy.aggroTarget = col.gameObject;
-            }
+            _enemy.aggroTarget = col.gameObject;
         }
     }
 }
