@@ -1,11 +1,12 @@
-﻿namespace Modifiers
+﻿using UnityEngine;
+
+namespace Modifiers
 {
-    public class Ricochet : AbstractModifier<OnFireContext>
+    public class Ricochet : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {
-            // TODO: Change bullet Riccochet count
-            throw new System.NotImplementedException();
+            e.Projectile.bounces += 4;
         }
 
         protected override void OnFailure(OnFireContext e)

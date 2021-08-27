@@ -1,10 +1,10 @@
 ﻿namespace Modifiers
 {
-    public class SharpBullet : AbstractModifier<OnFireContext>
+    public class SharpBullet : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {
-            throw new System.NotImplementedException();
+            e.Projectile.pierces += 4;
         }
 
         protected override void OnFailure(OnFireContext e)

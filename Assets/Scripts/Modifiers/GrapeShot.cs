@@ -1,16 +1,16 @@
 ﻿namespace Modifiers
 {
-    public class GrapeShot : AbstractModifier<OnFireContext>
+    public class GrapeShot : AbstractEventFilterModifier<BeforeFireContext>
     {
-        protected override void OnSuccess(OnFireContext e)
+        protected override BeforeFireContext OnSuccess(BeforeFireContext e)
         {
-            // TODO: set pierce value higher
-            throw new System.NotImplementedException();
+            e.BulletCount += 2;
+            e.Spread += 5;
+            return e;
         }
 
-        protected override void OnFailure(OnFireContext e)
+        protected override BeforeFireContext OnFailure(BeforeFireContext e)
         {
-            // TODO: Set this up with different pools for different event types
             throw new System.NotImplementedException();
         }
     }

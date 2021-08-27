@@ -55,6 +55,7 @@ public class CPMPlayer : MonoBehaviour
     public float airAcceleration = 2.0f;          // Air accel
     public float airDecceleration = 8.0f;         // Deacceleration experienced when ooposite strafing
     public float airControl = 0.5f;               // How precise air control is
+    public float airFriction = 0.5f;
     public float sideStrafeAcceleration = 50.0f;  // How fast acceleration occurs to get up to sideStrafeSpeed when
     public float sideStrafeSpeed = 1.0f;          // What the max speed to generate when side strafing
     public float jumpSpeed = 10.0f;                // The speed at which the character's up axis gains when hitting jump
@@ -213,6 +214,8 @@ public class CPMPlayer : MonoBehaviour
         Vector3 wishdir;
         float wishvel = airAcceleration;
         float accel;
+
+        ApplyFriction(airFriction);
         
         SetMovementDir();
 
@@ -297,10 +300,10 @@ public class CPMPlayer : MonoBehaviour
         Vector3 wishdir;
 
         // Do not apply friction if the player is queueing up the next jump
-        if (!wishJump)
+        //if (!wishJump)
             ApplyFriction(1.0f);
-        else
-            ApplyFriction(0);
+        //else
+        //    ApplyFriction(0);
 
         SetMovementDir();
 
@@ -343,6 +346,11 @@ public class CPMPlayer : MonoBehaviour
         if(_controller.isGrounded)
         {
             control = speed < runDeacceleration ? runDeacceleration : speed;
+            drop = control * friction * Time.deltaTime * t;
+        }
+        else
+        {
+            control = speed < airDecceleration ? airDecceleration : speed;
             drop = control * friction * Time.deltaTime * t;
         }
 

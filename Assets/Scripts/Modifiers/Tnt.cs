@@ -1,16 +1,15 @@
 ﻿namespace Modifiers
 {
-    public class Tnt : AbstractModifier<OnExpireContext>
+    public class Tnt : AbstractEventFilterModifier<ExplosionPowerFilterContext>
     {
-        protected override void OnSuccess(OnExpireContext e)
+        protected override ExplosionPowerFilterContext OnSuccess(ExplosionPowerFilterContext e)
         {
-            // TODO: tnt go boom
-            throw new System.NotImplementedException();
+            e.ExplosionPower++;
+            return e;
         }
 
-        protected override void OnFailure(OnExpireContext e)
+        protected override ExplosionPowerFilterContext OnFailure(ExplosionPowerFilterContext e)
         {
-            // TODO: Set this up with different pools for different event types
             throw new System.NotImplementedException();
         }
     }

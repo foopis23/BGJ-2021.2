@@ -1,114 +1,143 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CallbackEvents;
+using Exceptions;
+using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
 {
     // Editor Fields
-    public float Damage;
-    public float Speed;
-    public float MinSpeed = 1;
-    public float Range;
-    public float MinRange = 10;
-    public int Bounces;
-    public int MinBounces = 0;
-    public int Pierces;
-    public int MinPierces = 0;
-    public bool IsGrapeShot = false;
+    [FormerlySerializedAs("Damage")] public float damage;
+    [FormerlySerializedAs("Speed")] public float speed;
+    [FormerlySerializedAs("MinSpeed")] public float minSpeed = 1;
+    [FormerlySerializedAs("Range")] public float range;
+    [FormerlySerializedAs("MinRange")] public float minRange = 10;
+    [FormerlySerializedAs("Bounces")] public int bounces;
+    [FormerlySerializedAs("MinBounces")] public int minBounces;
+    [FormerlySerializedAs("Pierces")] public int pierces;
+    [FormerlySerializedAs("MinPierces")] public int minPierces;
+    // [FormerlySerializedAs("IsGrapeShot")] public bool isGrapeShot = false;
 
     // Private Fields
-    private float distanceTraveled;
-    private int bouncesLeft;
-    private int piercesLeft;
+    private float _distanceTraveled;
+    private int _totalBounces;
+    private int _totalPierces;
+    private HashSet<int> _hitEnemies;
 
-    void Start()
+    private void Start()
     {
         EventSystem.Current.FireEvent(new OnFireContext {Projectile = this});
-        distanceTraveled = 0;
-        bouncesLeft = Bounces;
-        piercesLeft = Pierces;
+        _distanceTraveled = 0;
+        _totalBounces = 0;
+        _totalPierces = 0;
+        
+        _hitEnemies ??= new HashSet<int>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-    }
+        if(range < minRange) { range = minRange; }
+        if(speed < minSpeed) { speed = minSpeed; }
+        if(bounces < minBounces) { bounces = minBounces; }
+        if(pierces < minPierces) { pierces = minPierces; }
 
-    void FixedUpdate()
-    {
-        if(Range < MinRange) { Range = MinRange; }
-        if(Speed < MinSpeed) { Speed = MinSpeed; }
-        if(Bounces < MinBounces) { Bounces = MinBounces; }
-        if(Pierces < MinPierces) { Pierces = MinPierces; }
+        _hitEnemies ??= new HashSet<int>();
+        var projectileTransform = transform;
 
-        float targetDistance = Speed * Time.fixedDeltaTime;
+        var targetDistance = speed * Time.fixedDeltaTime;
         bool hitSuccess;
         do
         {
-            RaycastHit hit;
-            hitSuccess = Physics.Raycast(transform.position, transform.forward, out hit, targetDistance) && hit.distance < Range - distanceTraveled;
-            if(hitSuccess)
+            hitSuccess = Physics.Raycast(projectileTransform.position, projectileTransform.forward, out var hit, targetDistance) && hit.distance < range - _distanceTraveled;
+            if (!hitSuccess) continue;
+            var hitObject = hit.collider.gameObject;
+            if(hitObject.layer == LayerMask.NameToLayer("Level"))
             {
-                switch(hit.collider.tag)
+                projectileTransform.forward = Vector3.Reflect(projectileTransform.forward, hit.normal);
+                EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
+                
+                if(_totalBounces++ >= bounces)
                 {
-                    case "Level":
-                        transform.forward = Vector3.Reflect(transform.forward, hit.normal);
-                        EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
-                        if(--bouncesLeft == 0)
-                        {
-                            Expire(true);
-                            return;
-                        }
-
-                        break;
-
-                    case "Enemy":
-                        EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
-                        // TODO: damage enemy (once enemy implemented)
-                        // TODO (also once enemy implemented): check to make sure we dont accidentally apply this twice
-                        if(--piercesLeft == 0)
-                        {
-                            Expire(true);
-                            return;
-                        }
-
-                        break;
-
-                    case "Player":
-                        EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
-                        // TODO: damage player (once player implemented)
-                        // TODO: also the thing with not hitging twihuchceceeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                        if(--piercesLeft == 0)
-                        {
-                            Expire(true);
-                            return;
-                        }
-
-                        break;
+                    Expire(true);
+                    return;
                 }
-
-                transform.position += transform.forward * hit.distance;
-                distanceTraveled += hit.distance;
-                targetDistance -= hit.distance;
+                
+                // Clear hit set so that after bounce enemy could be hit again
+                _hitEnemies.Clear();
             }
+            else if(hitObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
+                    
+                DamageEntity(hit.collider.gameObject);
+
+                if(_totalPierces++ >= pierces)
+                {
+                    Expire(true);
+                    return;
+                }
+            }
+            else if(hitObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
+                    
+                DamageEntity(hit.collider.gameObject);
+
+                if(_totalPierces++ >= pierces)
+                {
+                    Expire(true);
+                    return;
+                }
+            }
+
+            projectileTransform.position += projectileTransform.forward * hit.distance;
+            _distanceTraveled += hit.distance;
+            targetDistance -= hit.distance;
         }
         while(hitSuccess);
 
-        if(targetDistance > Range - distanceTraveled)
+        if(targetDistance > range - _distanceTraveled)
         {
             Expire(false);
         }
         else
         {
-            transform.position += transform.forward * targetDistance;
-            distanceTraveled += targetDistance;
+            projectileTransform.position += projectileTransform.forward * targetDistance;
+            _distanceTraveled += targetDistance;
         }
+    }
+
+    private void DamageEntity(GameObject o)
+    {
+        // check if object was already hit 
+        if (_hitEnemies.Contains(o.GetInstanceID())) return;
+
+        // get the entity of the object
+        var entity = o.GetComponent<LivingEntity>();
+        if (entity == null) throw new MissingEntityException(o);
+        
+        // Apply Damage
+        entity.Damage(damage);
+        
+        // Add Objcet to damaged set
+        _hitEnemies.Add(o.GetInstanceID());
     }
 
     private void Expire(bool onHit)
     {
+        var explosionCtx = EventSystem.Current.FireFilter<ExplosionPowerFilterContext>(
+            new ExplosionPowerFilterContext() {BaseExplosionPower = 0, ExplosionPower = 0});
+        var explosionPower = Mathf.Max(explosionCtx.ExplosionPower, 0);
+
+        if (explosionPower > 0)
+        {
+            const float damageMultiplier = 3.0f;
+            const float rangeMultiplier = 3.0f;
+            EventSystem.Current.FireEvent(new ExplosionEventContext(){Damage = damageMultiplier * explosionPower, Range = rangeMultiplier * explosionPower, Pos = transform.position});
+        }
+        
         EventSystem.Current.FireEvent(new OnExpireContext {Projectile = this, ExpiredOnHit = onHit});
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
 
@@ -139,4 +168,25 @@ public class OnExpireContext : EventContext
 {
     public Projectile Projectile;
     public bool ExpiredOnHit;
+}
+
+public class ExplosionPowerFilterContext : EventContext
+{
+    public int BaseExplosionPower;
+    public int ExplosionPower;
+}
+
+public class ExplosionEventContext : EventContext
+{
+    public float Range;
+    public float Damage;
+    public Vector3 Pos;
+
+    public float GetDamage(Vector3 entityPos)
+    {
+        var distance = Vector3.Distance(Pos, entityPos);
+        if (distance >= Range) return 0.0f;
+        var rangeRt = Mathf.Sqrt(Range);
+        return (rangeRt - Mathf.Sqrt(Range)) / rangeRt * Damage;
+    }
 }
