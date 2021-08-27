@@ -26,7 +26,7 @@ namespace Weapons
 
         public bool Fire(Transform spawnPoint)
         {
-            if (!CanFire()) return false;
+            if (!CanFire() || IsBusy()) return false;
             _lastFire = Time.time;
             _currentAmmo--;
 
@@ -55,30 +55,25 @@ namespace Weapons
 
         public bool Reload()
         {
-            if (!CanReload()) return false;
+            if (!CanReload() || IsBusy()) return false;
             _lastReload = Time.time;
             _currentAmmo = maxAmmo;
             return true;
         }
 
-        private bool CanFire()
+        public bool CanFire()
         {
-            return _currentAmmo > 0 && !IsReloading() && !IsShooting();
+            return _currentAmmo > 0;
         }
 
-        private bool CanReload()
+        public bool CanReload()
         {
-            return _currentAmmo < maxAmmo && !IsReloading() && !IsShooting();
+            return _currentAmmo < maxAmmo;
         }
 
-        private bool IsReloading()
+        public bool IsBusy()
         {
-            return Time.time - _lastReload < reloadTime;
-        }
-
-        private bool IsShooting()
-        {
-            return Time.time - _lastFire < fireRate;
+            return Time.time - _lastReload < reloadTime || Time.time - _lastFire < fireRate;
         }
     }
 }

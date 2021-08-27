@@ -15,6 +15,8 @@ namespace Weapons
         private IWeapon _weapon;
 
         private bool _enabled = true;
+        private bool _queuedFire = false;
+        private bool _queuedReload = false;
 
         public void Start()
         {
@@ -31,20 +33,38 @@ namespace Weapons
             if (!_enabled) return;
             if (_weapon == null) return;
 
-            if (Input.GetButtonDown("Fire1") && _weapon.Fire(bulletSpawnPoint))
+            if ((Input.GetButtonDown("Fire1") || _queuedFire) && _weapon.CanFire())
             {
-                reloadAnimator.gameObject.SetActive(false);
-                shootAnimator.gameObject.SetActive(true);
-                equipAnimator.gameObject.SetActive(false);
-                shootAnimator.Play("shoot");
+                if(_weapon.IsBusy())
+                {
+                    _queuedFire = true;
+                }
+                else
+                {
+                    _weapon.Fire(bulletSpawnPoint);
+                    reloadAnimator.gameObject.SetActive(false);
+                    shootAnimator.gameObject.SetActive(true);
+                    equipAnimator.gameObject.SetActive(false);
+                    shootAnimator.Play("shoot");
+                    _queuedFire = false;
+                }
             }
 
-            if (Input.GetButtonDown("Reload") && _weapon.Reload())
+            if ((Input.GetButtonDown("Reload") || _queuedReload) && _weapon.CanReload())
             {
-                reloadAnimator.gameObject.SetActive(true);
-                shootAnimator.gameObject.SetActive(false);
-                equipAnimator.gameObject.SetActive(false);
-                reloadAnimator.Play("reload");
+                if(_weapon.IsBusy())
+                {
+                    _queuedReload = true;
+                }
+                else
+                {
+                    _weapon.Reload();
+                    reloadAnimator.gameObject.SetActive(true);
+                    shootAnimator.gameObject.SetActive(false);
+                    equipAnimator.gameObject.SetActive(false);
+                    reloadAnimator.Play("reload");
+                    _queuedReload = false;
+                }
             }
         }
     }
