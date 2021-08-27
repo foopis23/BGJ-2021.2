@@ -9,6 +9,9 @@ public abstract class LivingEntity : MonoBehaviour
     public float MaxHealth;
     public bool IsAlive = true;
 
+    // public properties
+    public float Health { get; private set; }
+
     private void ExplosionListener(ExplosionEventContext e)
     {
         Damage(e.GetDamage(transform.position));
@@ -23,9 +26,6 @@ public abstract class LivingEntity : MonoBehaviour
     {
         EventSystem.Current.UnregisterEventListener<ExplosionEventContext>(ExplosionListener);
     }
-
-    // public properties
-    public float Health { get; private set; }
 
     public void Damage(float damage)
     {
