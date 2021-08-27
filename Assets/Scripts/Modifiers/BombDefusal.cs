@@ -1,15 +1,15 @@
 ﻿namespace Modifiers
 {
-    public class BombDefusal : AbstractEventModifier<OnFireContext>
+    public class BombDefusal : AbstractEventFilterModifier<ExplosionPowerFilterContext>
     {
-        protected override void OnSuccess(OnFireContext e)
+        protected override ExplosionPowerFilterContext OnSuccess(ExplosionPowerFilterContext e)
         {
-            throw new System.NotImplementedException();
+            e.ExplosionPower--;
+            return e;
         }
 
-        protected override void OnFailure(OnFireContext e)
+        protected override ExplosionPowerFilterContext OnFailure(ExplosionPowerFilterContext e)
         {
-            // TODO: Set this up with different pools for different event types
             throw new System.NotImplementedException();
         }
     }   

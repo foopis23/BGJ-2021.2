@@ -6,6 +6,8 @@
         protected override PlayerMoveSpeedFilterContext OnSuccess(PlayerMoveSpeedFilterContext e)
         {
             e.MoveSpeed -= e.BaseMoveSpeed * SpeedPercent;
+            e.MoveAcceleration -= e.BaseMoveAcceleration * (SpeedPercent / 2);
+            e.SideStrafeSpeed -= e.BaseSideStrafeSpeed * SpeedPercent;
             return e;
         }
 
