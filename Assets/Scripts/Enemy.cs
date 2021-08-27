@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using CallbackEvents;
+using UnityEngine.Serialization;
 
 public class Enemy : LivingEntity
 {
@@ -10,10 +11,12 @@ public class Enemy : LivingEntity
     public float attackDelay;
     public float attackRange;
     public float attackDamage;
+    [FormerlySerializedAs("Animator")] public Animator animator;
 
     // private fields
     private NavMeshAgent _navMeshAgent;
     private GameObject _attackTarget;
+    private bool isAttacking;
 
     // public properties
     public GameObject aggroTarget { get; set; }
@@ -23,6 +26,7 @@ public class Enemy : LivingEntity
         InitEvent();
         Heal(MaxHealth);
         aggroTarget = null;
+        isAttacking = false;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -31,12 +35,17 @@ public class Enemy : LivingEntity
     {
         if (!IsAlive) return;
         if (aggroTarget == null) return;
-        
+
         _navMeshAgent.SetDestination(aggroTarget.transform.position);
 
-        if(Vector3.Distance(transform.position, aggroTarget.transform.position) < attackRange)
+        if (animator.speed != 0)
         {
-            // TODO: play attack animation
+            animator.Play("walk");
+        }
+
+        if(Vector3.Distance(transform.position, aggroTarget.transform.position) < attackRange && !isAttacking) {
+            animator.Play("attack");
+            isAttacking = true;
             _attackTarget = aggroTarget;
             EventSystem.Current.CallbackAfter(Attack, (int) (attackDelay * 1000));
         }
@@ -44,11 +53,13 @@ public class Enemy : LivingEntity
 
     protected override void OnDeath()
     {
+        animator.Play("death");
         _navMeshAgent.enabled = false;
     }
 
     private void Attack()
     {
+        isAttacking = false;
         if (!IsAlive) return;
         if (_attackTarget == null ||
             !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;

@@ -95,9 +95,9 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                throw new Exception($"{hitObject.layer} was hit, wtf.");
+                throw new Exception("If you reach this, it means your layer mask is including to many layers. ahaha");
             }
-
+            
             projectileTransform.position += projectileTransform.forward * hit.distance;
             _distanceTraveled += hit.distance;
             targetDistance -= hit.distance;
