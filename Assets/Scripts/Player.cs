@@ -50,6 +50,11 @@ public class Player : LivingEntity
         
         Inventory.Update();
     }
+
+    protected override void OnDeath()
+    {
+        EventSystem.Current.FireEvent(new OnPlayerDeathContext(){Player = this});
+    }
 }
 
 public class PlayerMoveSpeedFilterContext : EventContext
@@ -76,4 +81,9 @@ public class PlayerMoveSpeedFilterContext : EventContext
         SideStrafeSpeed = BaseSideStrafeSpeed;
         MoveAcceleration = BaseMoveAcceleration;
     }
+}
+
+public class OnPlayerDeathContext : EventContext
+{
+    public Player Player;
 }

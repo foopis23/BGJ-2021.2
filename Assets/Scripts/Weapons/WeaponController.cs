@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CallbackEvents;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Weapons
@@ -13,21 +14,23 @@ namespace Weapons
         public GameObject weaponObject;
         private IWeapon _weapon;
 
+        private bool _enabled = true;
+
         public void Start()
         {
             _weapon = weaponObject.GetComponent<IWeapon>();
             reloadAnimator.gameObject.SetActive(false);
             shootAnimator.gameObject.SetActive(true);
             equipAnimator.gameObject.SetActive(false);
+            
+            EventSystem.Current.RegisterEventListener<OnPlayerDeathContext>((e) => _enabled = false);
         }
 
         public void Update()
         {
-            if (_weapon == null)
-            {
-                return;
-            }
-            
+            if (!_enabled) return;
+            if (_weapon == null) return;
+
             if (Input.GetButtonDown("Fire1") && _weapon.Fire(bulletSpawnPoint))
             {
                 reloadAnimator.gameObject.SetActive(false);
