@@ -1,6 +1,6 @@
 ﻿namespace Modifiers
 {
-    public class SharpBullet : AbstractModifier<OnFireContext>
+    public class SharpBullet : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {

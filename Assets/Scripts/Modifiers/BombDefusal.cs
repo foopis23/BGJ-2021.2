@@ -1,10 +1,10 @@
 ﻿namespace Modifiers
 {
-    public class Tnt : AbstractEventFilterModifier<ExplosionPowerFilterContext>
+    public class BombDefusal : AbstractEventFilterModifier<ExplosionPowerFilterContext>
     {
         protected override ExplosionPowerFilterContext OnSuccess(ExplosionPowerFilterContext e)
         {
-            e.ExplosionPower++;
+            e.ExplosionPower--;
             return e;
         }
 
@@ -12,5 +12,5 @@
         {
             throw new System.NotImplementedException();
         }
-    }
+    }   
 }

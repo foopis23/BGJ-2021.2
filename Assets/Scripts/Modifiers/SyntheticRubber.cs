@@ -1,6 +1,6 @@
 ﻿namespace Modifiers
 {
-    public class SyntheticRubber : AbstractModifier<OnFireContext>
+    public class SyntheticRubber : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {

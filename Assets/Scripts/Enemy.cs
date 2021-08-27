@@ -13,6 +13,7 @@ public class Enemy : LivingEntity
 
     void Start()
     {
+        InitEvent();
         Heal(MaxHealth);
         aggroTarget = null;
 

@@ -2,7 +2,7 @@
 
 namespace Modifiers
 {
-    public class Ricochet : AbstractModifier<OnFireContext>
+    public class Ricochet : AbstractEventModifier<OnFireContext>
     {
         protected override void OnSuccess(OnFireContext e)
         {

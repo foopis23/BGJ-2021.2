@@ -56,7 +56,6 @@ public class Projectile : MonoBehaviour
                 projectileTransform.forward = Vector3.Reflect(projectileTransform.forward, hit.normal);
                 EventSystem.Current.FireEvent(new OnHitWallContext {Projectile = this, Normal = hit.normal});
                 
-                Debug.Log($"{_totalBounces}/{bounces}");
                 if(_totalBounces++ >= bounces)
                 {
                     Expire(true);
@@ -126,6 +125,17 @@ public class Projectile : MonoBehaviour
 
     private void Expire(bool onHit)
     {
+        var explosionCtx = EventSystem.Current.FireFilter<ExplosionPowerFilterContext>(
+            new ExplosionPowerFilterContext() {BaseExplosionPower = 0, ExplosionPower = 0});
+        var explosionPower = Mathf.Max(explosionCtx.ExplosionPower, 0);
+
+        if (explosionPower > 0)
+        {
+            const float damageMultiplier = 3.0f;
+            const float rangeMultiplier = 3.0f;
+            EventSystem.Current.FireEvent(new ExplosionEventContext(){Damage = damageMultiplier * explosionPower, Range = rangeMultiplier * explosionPower, Pos = transform.position});
+        }
+        
         EventSystem.Current.FireEvent(new OnExpireContext {Projectile = this, ExpiredOnHit = onHit});
         Destroy(gameObject);
     }
@@ -158,4 +168,25 @@ public class OnExpireContext : EventContext
 {
     public Projectile Projectile;
     public bool ExpiredOnHit;
+}
+
+public class ExplosionPowerFilterContext : EventContext
+{
+    public int BaseExplosionPower;
+    public int ExplosionPower;
+}
+
+public class ExplosionEventContext : EventContext
+{
+    public float Range;
+    public float Damage;
+    public Vector3 Pos;
+
+    public float GetDamage(Vector3 entityPos)
+    {
+        var distance = Vector3.Distance(Pos, entityPos);
+        if (distance >= Range) return 0.0f;
+        var rangeRt = Mathf.Sqrt(Range);
+        return (rangeRt - Mathf.Sqrt(Range)) / rangeRt * Damage;
+    }
 }

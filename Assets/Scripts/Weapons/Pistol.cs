@@ -1,5 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using CallbackEvents;
+using Weapons;
+using Random = UnityEngine.Random;
 
 namespace Weapons
 {
@@ -8,13 +10,16 @@ namespace Weapons
         public int maxAmmo = 6; // How full the mag can be
         public float fireRate = 0.46f; // time between bullets
         public float reloadTime = 3.883f; // how long it takes to reload gun (animation length)
+        public int baseBulletCount = 1;
+        public float baseSpread = 0.0f;
+
         public GameObject bulletPrefab;
 
         private float _currentAmmo; // how much ammo currently
         private float _lastFire = 0.0f; // time the gun was fired last
         private float _lastReload = 0.0f; // last time the gun was reloaded
 
-        void Start()
+        private void Start()
         {
             _currentAmmo = maxAmmo;
         }
@@ -25,7 +30,25 @@ namespace Weapons
             _lastFire = Time.time;
             _currentAmmo--;
 
-            Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+            var filtered = EventSystem.Current.FireFilter<BeforeFireContext>(
+                new BeforeFireContext(this){BulletCount =  baseBulletCount, Spread = baseSpread}
+                );
+
+            var bulletCount = Mathf.Max(baseBulletCount, filtered.BulletCount);
+            var spread = Mathf.Max(0, filtered.Spread);
+
+            for (var i=0; i < bulletCount; i++)
+            {
+                var randomSpread = Quaternion.Euler(
+                    Random.value * spread - (spread * 0.5f),
+                    Random.value * spread - (spread * 0.5f),
+                    Random.value * spread - (spread * 0.5f)
+                );
+                var forward = randomSpread * spawnPoint.forward;
+                
+                var obj = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+                obj.transform.forward = forward;
+            }
 
             return true;
         }
@@ -57,5 +80,17 @@ namespace Weapons
         {
             return Time.time - _lastFire < fireRate;
         }
+    }
+}
+
+public class BeforeFireContext : EventContext
+{
+    public readonly IWeapon Weapon;
+    public int BulletCount;
+    public float Spread;
+
+    public BeforeFireContext(IWeapon weapon)
+    {
+        Weapon = weapon;
     }
 }
