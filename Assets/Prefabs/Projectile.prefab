@@ -130,7 +130,10 @@ MonoBehaviour:
   minSpeed: 1
   range: 200
   minRange: 10
-  bounces: 1
+  bounces: 0
   minBounces: 0
   pierces: 0
   minPierces: 0
+  projectileLayerMask:
+    serializedVersion: 2
+    m_Bits: 263424

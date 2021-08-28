@@ -27,11 +27,6 @@ public class Player : LivingEntity
         
         Heal(MaxHealth);
         Inventory = new ModifierInventory(inventorySize);
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
     }
 
     private void Update()
@@ -49,6 +44,12 @@ public class Player : LivingEntity
         }
         
         Inventory.Update();
+    }
+
+    public override void Damage(float amount)
+    {
+        base.Damage(amount);
+        EventSystem.Current.FireEvent(new OnPlayerDamageContext {Player = this, DamageAmount = amount});
     }
 
     protected override void OnDeath()
@@ -81,6 +82,12 @@ public class PlayerMoveSpeedFilterContext : EventContext
         SideStrafeSpeed = BaseSideStrafeSpeed;
         MoveAcceleration = BaseMoveAcceleration;
     }
+}
+
+public class OnPlayerDamageContext : EventContext
+{
+    public Player Player;
+    public float DamageAmount;
 }
 
 public class OnPlayerDeathContext : EventContext
