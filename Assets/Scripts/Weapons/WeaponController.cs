@@ -16,6 +16,8 @@ namespace Weapons
         public GameObject weaponObject;
         public TextMeshProUGUI ammoText;
 
+        public LivingEntity shooter;
+
         // private fields
         private IWeapon _weapon;
         private bool _enabled = true;
@@ -29,6 +31,7 @@ namespace Weapons
             shootAnimator.gameObject.SetActive(true);
             equipAnimator.gameObject.SetActive(false);
             ammoText.text = _weapon.currentAmmo.ToString();
+            shooter = GetComponent<LivingEntity>();
             
             EventSystem.Current.RegisterEventListener<OnPlayerDeathContext>((e) => _enabled = false);
         }
@@ -49,7 +52,7 @@ namespace Weapons
                 }
                 else
                 {
-                    _weapon.Fire(bulletSpawnPoint);
+                    _weapon.Fire(bulletSpawnPoint, shooter);
                     reloadAnimator.gameObject.SetActive(false);
                     shootAnimator.gameObject.SetActive(true);
                     equipAnimator.gameObject.SetActive(false);
