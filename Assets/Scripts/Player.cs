@@ -6,7 +6,7 @@ public class Player : LivingEntity
 {
     public CPMPlayer playerMovement;
     public int inventorySize = 5;
-    public ModifierInventory Inventory;
+    public CardInventory Inventory;
     public float statusEffectTickSpeed = 20.0f;
     private float _lastStatusEffectTick;
 
@@ -26,7 +26,7 @@ public class Player : LivingEntity
         _lastStatusEffectTick = -statusEffectTickSpeed;
         
         Heal(MaxHealth);
-        Inventory = new ModifierInventory(inventorySize);
+        Inventory = new CardInventory(inventorySize);
     }
 
     private void Update()
