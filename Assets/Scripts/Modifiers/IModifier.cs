@@ -6,5 +6,6 @@
         public void Update();
         public void Activate();
         public void Deactivate();
+        public string GetFlavorText();
     }
 }
