@@ -355,9 +355,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   IsAlive: 1
-  playerMovement: {fileID: 0}
+  baseDamageResistance: 0
+  baseWalkSpeed: 0
+  baseStrafeSpeed: 0
+  baseMoveAcceleration: 0
+  baseHealthRegeneration: 0
+  baseHealthRegenerationTickSpeed: 0
+  baseHealthRegenerationDelay: 0
+  playerMovement: {fileID: 1311247105997312320}
   inventorySize: 5
-  statusEffectTickSpeed: 20
+  passiveModifierTickSpeed: 20
+  startCard: {fileID: 11400000, guid: 798ae248b1de0d44eb775d443ab400cb, type: 2}
 --- !u!114 &1202004756380482706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +385,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 1004581441988679349}
   weaponObject: {fileID: 9021727717844621359}
   ammoText: {fileID: 0}
+  shooter: {fileID: 0}
 --- !u!95 &1678526541958118128
 Animator:
   serializedVersion: 3
