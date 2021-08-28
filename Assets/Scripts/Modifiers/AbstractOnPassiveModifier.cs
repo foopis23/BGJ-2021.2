@@ -2,12 +2,11 @@
 
 namespace Modifiers
 {
-    public abstract class AbstractOnPassiveModifier : AbstractEventFilterModifier<PlayerStatusEffectContext>
+    public abstract class AbstractOnPassiveModifier : AbstractEventModifier<OnPlayerPassiveModifierTick>
     {
-        protected override PlayerStatusEffectContext OnFailure(PlayerStatusEffectContext e)
+        protected override void OnFailure(OnPlayerPassiveModifierTick e)
         {
             ChaosPool.OnFail(e);
-            return e;
         }
     }
 }
