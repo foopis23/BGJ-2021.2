@@ -1,6 +1,6 @@
 ﻿namespace Modifiers
 {
-    public class ExplosionPower : AbstractEventFilterModifier<OnExpireContext>
+    public class ExplosionPower : AbstractOnHitModifier
     {
         protected override OnExpireContext OnSuccess(OnExpireContext e)
         {
@@ -8,9 +8,9 @@
             return e;
         }
 
-        protected override OnExpireContext OnFailure(OnExpireContext e)
+        public override string GetFlavorText()
         {
-            throw new System.NotImplementedException();
+            return $"Explosion Power {Strength}: Increases explosion power of projectile.";
         }
     }   
 }

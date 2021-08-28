@@ -13,5 +13,10 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Spread ${Strength}: Bullet Spread Angle.";
+        }
     }
 }

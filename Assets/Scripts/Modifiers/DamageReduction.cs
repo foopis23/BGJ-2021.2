@@ -8,5 +8,10 @@ namespace Modifiers
         {
             e.Player.ApplyStatusEffect(new DamageResistance(Strength), e.TickTime + 1);
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Damage Reduction ${Strength}: reduces incoming damage to player.";
+        }
     }
 }
