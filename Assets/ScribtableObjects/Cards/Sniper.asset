@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7a8e7c2e3a13a429629d0d02502093, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: 
+  Name: Sniper
+  Icon: {fileID: 2800000, guid: a2032e2264d1a0d41974bce1bb854b7b, type: 3}
+  ModifierNames:
+  - bulletCount -3
+  - pierces 3
+  - moveSpeed -1

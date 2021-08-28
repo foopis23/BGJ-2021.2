@@ -1,23 +1,31 @@
 using System;
 using System.Collections.Generic;
-using Modifiers;
 
-public static class StringModifierMap
+namespace Modifiers
 {
-    private static Dictionary<string, Type> dict;
-
-    static StringModifierMap()
+    public static class StringModifierMap
     {
-        dict = new Dictionary<string, Type>()
+        private static Dictionary<string, Type> dict;
+
+        static StringModifierMap()
         {
-            { "bounces", typeof(Bounces) },
-            { "bulletCount", typeof(BulletCount) },
-            { "explosion", typeof(ExplosionPower) },
-            { "moveSpeed", typeof(MoveSpeed) },
-            { "pierces", typeof(Pierces) },
-            { "spread", typeof(Spread) },
-        };
-    }
+            dict = new Dictionary<string, Type>()
+            {
+                { "bounces", typeof(Bounces) },
+                { "bulletCount", typeof(BulletCount) },
+                { "explosion", typeof(ExplosionPower) },
+                { "moveSpeed", typeof(MoveSpeed) },
+                { "pierces", typeof(Pierces) },
+                { "spread", typeof(Spread) },
+                { "damageReduction", typeof(DamageReduction)},
+                { "fireDamage", typeof(FireDamage) },
+                { "poisonDamage", typeof(PoisonDamage)},
+                { "healFromHit", typeof(HealFromHit)},
+                { "AttackTargetSpeed", typeof(AttackTargetSpeed)},
+                { "regenerationAmount", typeof(RegenerationAmount)},
+                { "attackTargetRegenerationAmount", typeof(AttackTargetRegenerationAmount)}
+            };
+        }
 
     public static IModifier CreateModifierFromName(string name, int strength)
     {

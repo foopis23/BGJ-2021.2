@@ -1,18 +1,15 @@
 using CallbackEvents;
 using Modifiers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : LivingEntity
 {
     public CPMPlayer playerMovement;
     public int inventorySize = 5;
     public CardInventory Inventory;
-    public float statusEffectTickSpeed = 20.0f;
-    private float _lastStatusEffectTick;
-
-    private float _baseMoveSpeed;
-    private float _baseStrafeSpeed;
-    private float _baseMoveAcc;
+    [FormerlySerializedAs("statusEffectTickSpeed")] public float passiveModifierTickSpeed = 20.0f;
+    private float _lastPassiveModifierTick;
 
     void Awake()
     {
@@ -21,32 +18,23 @@ public class Player : LivingEntity
 
     private void Start()
     {
-        InitEvent();
-        
-        playerMovement ??= GetComponent<CPMPlayer>();
-        _baseMoveSpeed = playerMovement.moveSpeed;
-        _baseStrafeSpeed = playerMovement.sideStrafeSpeed;
-        _baseMoveAcc = playerMovement.runAcceleration;
-        
-        _lastStatusEffectTick = -statusEffectTickSpeed;
-        
-        Heal(MaxHealth);
+        _lastPassiveModifierTick = 0;
+        Init();
+        baseWalkSpeed = playerMovement.moveSpeed;
+        baseStrafeSpeed = playerMovement.sideStrafeSpeed;
+        baseMoveAcceleration = playerMovement.runAcceleration;
     }
 
     private void Update()
     {
-        if (Time.time - _lastStatusEffectTick >= statusEffectTickSpeed)
-        {
-            var moveSpeedContext = EventSystem.Current.FireFilter<PlayerStatusEffectContext>(
-                new PlayerStatusEffectContext(_baseMoveSpeed, _baseStrafeSpeed, _baseMoveAcc, this));
-
-            playerMovement.moveSpeed = moveSpeedContext.MoveSpeed;
-            playerMovement.sideStrafeSpeed = moveSpeedContext.SideStrafeSpeed;
-            playerMovement.runAcceleration = moveSpeedContext.MoveAcceleration;
-            
-            _lastStatusEffectTick = Time.time;
-        }
+        playerMovement.moveSpeed = WalkSpeed;
+        playerMovement.sideStrafeSpeed = StrafeSpeed;
+        playerMovement.runAcceleration = MoveAcceleration;
         
+        if (Time.time - _lastPassiveModifierTick >= passiveModifierTickSpeed)
+        {
+            EventSystem.Current.FireEvent(new OnPlayerPassiveModifierTick(this, Time.time - _lastPassiveModifierTick));
+        }
         Inventory.Update();
     }
 
@@ -62,29 +50,15 @@ public class Player : LivingEntity
     }
 }
 
-public class PlayerStatusEffectContext : EventContext
+public class OnPlayerPassiveModifierTick : EventContext
 {
     public readonly Player Player;
-    
-    public readonly float BaseMoveSpeed;
-    public float MoveSpeed;
+    public readonly float TickTime;
 
-    public readonly float BaseSideStrafeSpeed;
-    public float SideStrafeSpeed;
-
-    public readonly float BaseMoveAcceleration;
-    public float MoveAcceleration;
-
-    public PlayerStatusEffectContext(float baseMoveSpeed, float baseSideStrafeSpeed, float baseMoveAcceleration, Player player)
+    public OnPlayerPassiveModifierTick(Player player, float tickTime)
     {
         Player = player;
-        BaseMoveSpeed = baseMoveSpeed;
-        BaseSideStrafeSpeed = baseSideStrafeSpeed;
-        BaseMoveAcceleration = baseMoveAcceleration;
-
-        MoveSpeed = baseMoveSpeed;
-        SideStrafeSpeed = BaseSideStrafeSpeed;
-        MoveAcceleration = BaseMoveAcceleration;
+        this.TickTime = tickTime;
     }
 }
 

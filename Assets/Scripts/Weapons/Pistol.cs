@@ -25,7 +25,7 @@ namespace Weapons
             currentAmmo = maxAmmo;
         }
 
-        public bool Fire(Transform spawnPoint)
+        public bool Fire(Transform spawnPoint, LivingEntity shooter)
         {
             if (!CanFire() || IsBusy()) return false;
             _lastFire = Time.time;
@@ -49,6 +49,7 @@ namespace Weapons
                 
                 var obj = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
                 obj.transform.forward = forward;
+                obj.GetComponent<Projectile>().Dad = shooter;
             }
 
             return true;

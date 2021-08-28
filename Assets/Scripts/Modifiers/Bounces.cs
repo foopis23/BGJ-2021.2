@@ -8,5 +8,10 @@ namespace Modifiers
         {
             e.Projectile.bounces += Strength;
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Bounce ${Strength}: Changes the amount of wall bounces for a projectile.";
+        }
     }
 }

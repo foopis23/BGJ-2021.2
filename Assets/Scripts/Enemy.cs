@@ -24,22 +24,25 @@ public class Enemy : LivingEntity
 
     private void Start()
     {
-        InitEvent();
-        Heal(MaxHealth);
+        Init();
+        
         aggroTarget = null;
         isAttacking = false;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        baseWalkSpeed = _navMeshAgent.speed;
     }
 
     private void Update()
     {
+        _navMeshAgent.speed = WalkSpeed;
+        
         if (!IsAlive) return;
         if (aggroTarget == null) return;
 
         _navMeshAgent.SetDestination(aggroTarget.transform.position);
 
-        if (animator.speed != 0)
+        if (_navMeshAgent.velocity.magnitude != 0)
         {
             animator.Play("walk");
         }
@@ -55,8 +58,10 @@ public class Enemy : LivingEntity
     protected override void OnDeath()
     {
         _navMeshAgent.enabled = false;
-        animator.Play("death");
+        DeInit();
         collider.enabled = false;
+        
+        animator.Play("death");
         
         EventSystem.Current.CallbackAfter(() =>
         {
