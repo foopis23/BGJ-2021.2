@@ -2,11 +2,9 @@
 {
     public class ExplosionPower : AbstractEventFilterModifier<OnExpireContext>
     {
-        public ExplosionPower(int strength) : base(strength) {}
-
         protected override OnExpireContext OnSuccess(OnExpireContext e)
         {
-            e.ExplosionPower += _strength;
+            e.ExplosionPower += Strength;
             return e;
         }
 

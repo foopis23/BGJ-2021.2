@@ -19,9 +19,11 @@ public static class StringModifierMap
         };
     }
 
-    public static IModifier CreateModifierFromName(string name)
+    public static IModifier CreateModifierFromName(string name, int strength)
     {
         if(!dict.ContainsKey(name)) return null;
-        return (IModifier) Activator.CreateInstance(dict[name]);
+        var modifier = (IModifier) Activator.CreateInstance(dict[name]);
+        modifier.SetStrength(strength);
+        return modifier;
     }
 }

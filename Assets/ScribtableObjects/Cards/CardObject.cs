@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Modifiers;
 
@@ -15,7 +16,8 @@ public class CardObject : ScriptableObject
         Modifiers = new IModifier[ModifierNames.Length];
         for(int i = 0; i < ModifierNames.Length; i++)
         {
-            Modifiers[i] = StringModifierMap.CreateModifierFromName(ModifierNames[i]);
+            string[] modifierData = ModifierNames[i].Split(' ');
+            Modifiers[i] = StringModifierMap.CreateModifierFromName(modifierData[0],  Int32.Parse(modifierData[1]));
         }
     }
 }

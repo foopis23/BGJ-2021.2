@@ -2,11 +2,10 @@
 {
     public class Spread : AbstractEventFilterModifier<BeforeFireContext>
     {
-        public Spread(int strength) : base(strength) {}
-
+        private const float SpreadAmount = 2f;
         protected override BeforeFireContext OnSuccess(BeforeFireContext e)
         {
-            e.Spread += _strength;
+            e.Spread += SpreadAmount * Strength;
             return e;
         }
 
