@@ -9,7 +9,6 @@ public class HealthBarController : MonoBehaviour
     public Player player;
     public RawImage HealthBarRed;
     public RawImage HealthBarGreen;
-    public float damageTickDuration;
 
     // private fields
     private float barSize;

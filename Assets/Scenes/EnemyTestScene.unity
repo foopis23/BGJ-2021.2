@@ -195,6 +195,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21430714}
   m_CullTransparentMesh: 1
+--- !u!114 &51816300 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
+  m_PrefabInstance: {fileID: 2010978090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08ce40998f6c184993b4c50bd6b3d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &90085237
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +284,7 @@ GameObject:
   - component: {fileID: 342468532}
   - component: {fileID: 342468531}
   - component: {fileID: 342468530}
+  - component: {fileID: 342468534}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -363,6 +375,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &342468534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342468529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3971b368589250b4f94d657624bdf550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 51816300}
+  HealthBarRed: {fileID: 1508152388}
+  HealthBarGreen: {fileID: 21430716}
 --- !u!1 &422918811
 GameObject:
   m_ObjectHideFlags: 0
