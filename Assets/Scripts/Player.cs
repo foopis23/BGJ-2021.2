@@ -46,6 +46,12 @@ public class Player : LivingEntity
         Inventory.Update();
     }
 
+    public override void Damage(float amount)
+    {
+        base.Damage(amount);
+        EventSystem.Current.FireEvent(new OnPlayerDamageContext {Player = this, DamageAmount = amount});
+    }
+
     protected override void OnDeath()
     {
         EventSystem.Current.FireEvent(new OnPlayerDeathContext(){Player = this});
@@ -76,6 +82,12 @@ public class PlayerMoveSpeedFilterContext : EventContext
         SideStrafeSpeed = BaseSideStrafeSpeed;
         MoveAcceleration = BaseMoveAcceleration;
     }
+}
+
+public class OnPlayerDamageContext : EventContext
+{
+    public Player Player;
+    public float DamageAmount;
 }
 
 public class OnPlayerDeathContext : EventContext
