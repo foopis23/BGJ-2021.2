@@ -5,8 +5,6 @@ namespace Modifiers
 {
     public abstract class AbstractEventModifier<T> : AbstractModifier<T> where T:EventContext
     {
-        public AbstractEventModifier(int strength) : base(strength) {}
-
         public override void Activate()
         {
             EventSystem.Current.RegisterEventListener<T>(OnTrigger);
