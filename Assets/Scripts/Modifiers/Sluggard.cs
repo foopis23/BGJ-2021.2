@@ -1,9 +1,9 @@
 ﻿namespace Modifiers
 {
-    public class Sluggard : AbstractEventFilterModifier<PlayerMoveSpeedFilterContext>
+    public class Sluggard : AbstractEventFilterModifier<PlayerStatusEffectContext>
     {
         private const float SpeedPercent = 0.2f;
-        protected override PlayerMoveSpeedFilterContext OnSuccess(PlayerMoveSpeedFilterContext e)
+        protected override PlayerStatusEffectContext OnSuccess(PlayerStatusEffectContext e)
         {
             e.MoveSpeed -= e.BaseMoveSpeed * SpeedPercent;
             e.MoveAcceleration -= e.BaseMoveAcceleration * (SpeedPercent / 2);
@@ -11,7 +11,7 @@
             return e;
         }
 
-        protected override PlayerMoveSpeedFilterContext OnFailure(PlayerMoveSpeedFilterContext e)
+        protected override PlayerStatusEffectContext OnFailure(PlayerStatusEffectContext e)
         {
             // TODO: Set this up with different pools for different event types
             throw new System.NotImplementedException();

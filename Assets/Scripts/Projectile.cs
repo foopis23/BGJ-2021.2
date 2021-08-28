@@ -18,8 +18,9 @@ public class Projectile : MonoBehaviour
     [FormerlySerializedAs("Pierces")] public int pierces;
     [FormerlySerializedAs("MinPierces")] public int minPierces;
     // [FormerlySerializedAs("IsGrapeShot")] public bool isGrapeShot = false;
-
+    
     public LayerMask projectileLayerMask;
+    public int baseExplosionPower = 0;
 
     // Private Fields
     private float _distanceTraveled;
@@ -33,7 +34,7 @@ public class Projectile : MonoBehaviour
         _distanceTraveled = 0;
         _totalBounces = 0;
         _totalPierces = 0;
-        
+
         _hitEnemies ??= new HashSet<int>();
     }
 
@@ -133,17 +134,13 @@ public class Projectile : MonoBehaviour
 
     private void Expire(bool onHit)
     {
-        var explosionCtx = EventSystem.Current.FireFilter<ExplosionPowerFilterContext>(
-            new ExplosionPowerFilterContext() {BaseExplosionPower = 0, ExplosionPower = 0});
-        var explosionPower = Mathf.Max(explosionCtx.ExplosionPower, 0);
-
-        if (explosionPower > 0)
-        {
-
+        var expireCtx = EventSystem.Current.FireFilter<OnExpireContext>(new OnExpireContext(this, onHit) {ExplosionPower = baseExplosionPower});
+        var explosionPower = Mathf.Max(expireCtx.ExplosionPower, 0);
+        
+        if (explosionPower > 0) {
             EventSystem.Current.FireEvent(new ExplosionEventContext(explosionPower){Pos = transform.position});
         }
         
-        EventSystem.Current.FireEvent(new OnExpireContext {Projectile = this, ExpiredOnHit = onHit});
         Destroy(gameObject);
     }
 }
@@ -173,14 +170,15 @@ public class OnHitPlayerContext : EventContext
 
 public class OnExpireContext : EventContext
 {
-    public Projectile Projectile;
-    public bool ExpiredOnHit;
-}
-
-public class ExplosionPowerFilterContext : EventContext
-{
-    public int BaseExplosionPower;
+    public readonly Projectile Projectile;
+    public readonly bool ExpiredOnHit;
     public int ExplosionPower;
+
+    public OnExpireContext(Projectile projectile, bool expiredOnHit)
+    {
+        Projectile = projectile;
+        ExpiredOnHit = expiredOnHit;
+    }
 }
 
 public class ExplosionEventContext : EventContext

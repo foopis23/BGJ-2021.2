@@ -33,8 +33,8 @@ public class Player : LivingEntity
     {
         if (Time.time - _lastStatusEffectTick >= statusEffectTickSpeed)
         {
-            var moveSpeedContext = EventSystem.Current.FireFilter<PlayerMoveSpeedFilterContext>(
-                new PlayerMoveSpeedFilterContext(_baseMoveSpeed, _baseStrafeSpeed, _baseMoveAcc, this));
+            var moveSpeedContext = EventSystem.Current.FireFilter<PlayerStatusEffectContext>(
+                new PlayerStatusEffectContext(_baseMoveSpeed, _baseStrafeSpeed, _baseMoveAcc, this));
 
             playerMovement.moveSpeed = moveSpeedContext.MoveSpeed;
             playerMovement.sideStrafeSpeed = moveSpeedContext.SideStrafeSpeed;
@@ -58,7 +58,7 @@ public class Player : LivingEntity
     }
 }
 
-public class PlayerMoveSpeedFilterContext : EventContext
+public class PlayerStatusEffectContext : EventContext
 {
     public readonly Player Player;
     
@@ -71,7 +71,7 @@ public class PlayerMoveSpeedFilterContext : EventContext
     public readonly float BaseMoveAcceleration;
     public float MoveAcceleration;
 
-    public PlayerMoveSpeedFilterContext(float baseMoveSpeed, float baseSideStrafeSpeed, float baseMoveAcceleration, Player player)
+    public PlayerStatusEffectContext(float baseMoveSpeed, float baseSideStrafeSpeed, float baseMoveAcceleration, Player player)
     {
         Player = player;
         BaseMoveSpeed = baseMoveSpeed;
