@@ -10,5 +10,10 @@ namespace Modifiers
             _effect ??= new SpeedStatusEffect(Strength);
             e.Player.ApplyStatusEffect(_effect, e.TickTime + 1);
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Move Speed {Strength}: Change the move speed of the player";
+        }
     }
 }

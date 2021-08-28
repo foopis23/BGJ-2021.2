@@ -14,5 +14,10 @@ namespace Modifiers
 
             return e;
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Poison Damage ${Strength}: Inflict poison on Target";
+        }
     }
 }

@@ -11,5 +11,10 @@
 
             return e;
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Attack Target Regeneration {Strength}: Sets the regeneration for all targets hit";
+        }
     }
 }

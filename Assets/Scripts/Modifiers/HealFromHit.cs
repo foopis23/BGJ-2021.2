@@ -9,5 +9,10 @@
             e.Projectile.Dad.Heal(healthGain);
             return e;
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Life Drain ${Strength}: Drain health from all target hit.";
+        }
     }
 }

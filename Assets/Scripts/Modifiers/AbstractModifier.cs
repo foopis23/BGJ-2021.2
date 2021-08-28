@@ -13,6 +13,8 @@ namespace Modifiers
         {
             Strength = strength;
         }
+
+        public abstract string GetFlavorText();
         
         public abstract void Activate();
 

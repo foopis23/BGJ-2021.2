@@ -12,5 +12,10 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Bullet Count ${Strength}: Increases the amount of bullets fired.";
+        }
     }
 }
