@@ -16,13 +16,20 @@ public class Player : LivingEntity
         _lastPassiveModifierTick = 0;
         Init();
         Inventory = new CardInventory(inventorySize);
+        baseWalkSpeed = playerMovement.moveSpeed;
+        baseStrafeSpeed = playerMovement.sideStrafeSpeed;
+        baseMoveAcceleration = playerMovement.runAcceleration;
     }
 
     private void Update()
     {
+        playerMovement.moveSpeed = WalkSpeed;
+        playerMovement.sideStrafeSpeed = StrafeSpeed;
+        playerMovement.runAcceleration = MoveAcceleration;
+        
         if (Time.time - _lastPassiveModifierTick >= passiveModifierTickSpeed)
         {
-            EventSystem.Current.FireEvent(new OnPlayerPassiveModifierTick(this));
+            EventSystem.Current.FireEvent(new OnPlayerPassiveModifierTick(this, Time.time - _lastPassiveModifierTick));
         }
         Inventory.Update();
     }
@@ -42,10 +49,12 @@ public class Player : LivingEntity
 public class OnPlayerPassiveModifierTick : EventContext
 {
     public readonly Player Player;
+    public readonly float TickTime;
 
-    public OnPlayerPassiveModifierTick(Player player)
+    public OnPlayerPassiveModifierTick(Player player, float tickTime)
     {
         Player = player;
+        this.TickTime = tickTime;
     }
 }
 

@@ -1,13 +1,14 @@
-﻿namespace Modifiers
+﻿using StatusEffects;
+
+namespace Modifiers
 {
     public class MoveSpeed : AbstractOnPassiveModifier
     {
+        private SpeedStatusEffect _effect;
         protected override void OnSuccess(OnPlayerPassiveModifierTick e)
         {
-            e.MoveSpeed += e.BaseMoveSpeed * SpeedPercent * Strength;
-            e.MoveAcceleration += e.BaseMoveAcceleration * SpeedPercent * 0.5f * Strength;
-            e.SideStrafeSpeed += e.BaseSideStrafeSpeed * SpeedPercent * Strength;
-            return e;
+            _effect ??= new SpeedStatusEffect(Strength);
+            e.Player.ApplyStatusEffect(_effect, e.TickTime + 1);
         }
     }
 }

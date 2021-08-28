@@ -8,7 +8,7 @@ namespace StatusEffects
 
         protected AbstractStatusEffect(int level)
         {
-            Level = Level;
+            Level = level;
         }
 
         public abstract void StatFilter(LivingEntity e);

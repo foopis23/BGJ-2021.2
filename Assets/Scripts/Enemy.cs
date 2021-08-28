@@ -30,16 +30,19 @@ public class Enemy : LivingEntity
         isAttacking = false;
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        baseWalkSpeed = _navMeshAgent.speed;
     }
 
     private void Update()
     {
+        _navMeshAgent.speed = WalkSpeed;
+        
         if (!IsAlive) return;
         if (aggroTarget == null) return;
 
         _navMeshAgent.SetDestination(aggroTarget.transform.position);
 
-        if (animator.speed != 0)
+        if (_navMeshAgent.velocity.magnitude != 0)
         {
             animator.Play("walk");
         }

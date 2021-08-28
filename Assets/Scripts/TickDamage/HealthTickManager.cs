@@ -41,27 +41,27 @@ namespace TickDamage
             // Fire Tick
             if (Time.time - _lastFireTick >= fireTickSpeed)
             {
-                EventSystem.Current.FireEvent(new TickHealthContext(){Type = TickType.Fire,Damage = fireTickDamage, TickLength = fireTickSpeed});
+                EventSystem.Current.FireEvent(new TickHealthContext(){Type = TickType.Fire,Damage = fireTickDamage, TickLength = Time.time - _lastFireTick});
                 _lastFireTick = Time.time;
             }
         
             // Poison Tick
             if (Time.time - _lastPoisonTick > poisonTickSpeed)
             {
-                EventSystem.Current.FireEvent(new TickHealthContext(){Type = TickType.Poison, Damage = poisonTickDamage, TickLength = poisonTickSpeed});
+                EventSystem.Current.FireEvent(new TickHealthContext(){Type = TickType.Poison, Damage = poisonTickDamage, TickLength = Time.time - _lastPoisonTick});
                 _lastPoisonTick = Time.time;
             }
 
             // Regeneration Tick
             if (Time.time - _lastRegenerationTick >= regenerationTickSpeed)
             {
-                EventSystem.Current.FireEvent(new TickHealthContext(){ Type = TickType.Regeneration, TickLength = regenerationTickSpeed});
+                EventSystem.Current.FireEvent(new TickHealthContext(){ Type = TickType.Regeneration, TickLength = Time.time - _lastRegenerationTick});
                 _lastRegenerationTick = Time.time;
             }
 
             if (Time.time - _lastStatusEffectTick >= statusEffectTickSpeed)
             {
-                EventSystem.Current.FireEvent(new TickHealthContext(){ Type = TickType.StatusEffects, TickLength = statusEffectTickSpeed});
+                EventSystem.Current.FireEvent(new TickHealthContext(){ Type = TickType.StatusEffects, TickLength = Time.time - _lastStatusEffectTick});
             }
         }
     }
