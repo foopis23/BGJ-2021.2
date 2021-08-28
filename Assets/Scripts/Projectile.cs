@@ -21,6 +21,11 @@ public class Projectile : MonoBehaviour
     
     public LayerMask projectileLayerMask;
     public int baseExplosionPower = 0;
+    
+     // used for modifier
+    [NonSerialized] public LivingEntity Dad;
+
+    public List<LivingEntity> AllHitEntities { get; private set; }
 
     // Private Fields
     private float _distanceTraveled;
@@ -34,6 +39,7 @@ public class Projectile : MonoBehaviour
         _distanceTraveled = 0;
         _totalBounces = 0;
         _totalPierces = 0;
+        AllHitEntities = new List<LivingEntity>();
 
         _hitEnemies ??= new HashSet<int>();
     }
@@ -72,9 +78,11 @@ public class Projectile : MonoBehaviour
             }
             else if(hitObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = hit.collider.gameObject.GetComponent<Enemy>()});
+                var entity = hit.collider.gameObject.GetComponent<Enemy>();
+                EventSystem.Current.FireEvent(new OnHitEnemyContext {Projectile = this, Enemy = entity});
                     
                 DamageEntity(hit.collider.gameObject);
+                AllHitEntities.Add(entity);
 
                 if(_totalPierces++ >= pierces)
                 {
@@ -84,9 +92,11 @@ public class Projectile : MonoBehaviour
             }
             else if(hitObject.layer == LayerMask.NameToLayer("Player"))
             {
-                EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = hit.collider.gameObject.GetComponent<Player>()});
+                var entity = hit.collider.gameObject.GetComponent<Player>();
+                EventSystem.Current.FireEvent(new OnHitPlayerContext {Projectile = this, Player = entity});
                     
                 DamageEntity(hit.collider.gameObject);
+                AllHitEntities.Add(entity);
 
                 if(_totalPierces++ >= pierces)
                 {
