@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CardInventory
 {
+    public const float Chaosity = 0.01f;
+
     public CardObject[] Cards;
-    public float Chaosity;
     public float TickSpeed;
     private float _lastTick;
     

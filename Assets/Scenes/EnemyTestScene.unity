@@ -729,6 +729,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
+      propertyPath: startCard
+      value: 
+      objectReference: {fileID: 11400000, guid: 798ae248b1de0d44eb775d443ab400cb, type: 2}
     - target: {fileID: 1202004756380482706, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
       propertyPath: ammoText
       value: 
