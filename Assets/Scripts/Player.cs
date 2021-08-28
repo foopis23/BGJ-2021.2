@@ -14,6 +14,11 @@ public class Player : LivingEntity
     private float _baseStrafeSpeed;
     private float _baseMoveAcc;
 
+    void Awake()
+    {
+        Inventory = new CardInventory(inventorySize);
+    }
+
     private void Start()
     {
         InitEvent();
@@ -26,7 +31,6 @@ public class Player : LivingEntity
         _lastStatusEffectTick = -statusEffectTickSpeed;
         
         Heal(MaxHealth);
-        Inventory = new CardInventory(inventorySize);
     }
 
     private void Update()

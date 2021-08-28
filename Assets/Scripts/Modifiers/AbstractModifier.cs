@@ -5,9 +5,13 @@ namespace Modifiers
 {
     public abstract class AbstractModifier<T> : IModifier where T : EventContext
     {
+        public CardObject Card;
         public int Strength;
-        public float Corruption = 0.1f;
-        protected float Instability = 0.0f;
+
+        public void SetCard(CardObject card)
+        {
+            Card = card;
+        }
 
         public void SetStrength(int strength)
         {
@@ -18,11 +22,6 @@ namespace Modifiers
 
         public abstract void Deactivate();
 
-        public virtual void Update()
-        {
-            if (Random.Range(0.0f, 1.0f) > Corruption) return;
-            
-            Instability = Mathf.Min(1.0f, Instability + 0.01f);
-        }
+        public virtual void Update() {}
     }
 }
