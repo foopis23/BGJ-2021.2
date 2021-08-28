@@ -1,11 +1,12 @@
 ﻿namespace Modifiers
 {
-    public class Accuracy : AbstractEventFilterModifier<BeforeFireContext>
+    public class BulletCount : AbstractEventFilterModifier<BeforeFireContext>
     {
+        public BulletCount(int strength) : base(strength) {}
+
         protected override BeforeFireContext OnSuccess(BeforeFireContext e)
         {
-            e.BulletCount -= 2;
-            e.Spread -= 5;
+            e.BulletCount += _strength;
             return e;
         }
 

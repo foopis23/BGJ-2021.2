@@ -10,7 +10,12 @@ public static class StringModifierMap
     {
         dict = new Dictionary<string, Type>()
         {
-
+            { "bounces", typeof(Bounces) },
+            { "bulletCount", typeof(BulletCount) },
+            { "explosion", typeof(ExplosionPower) },
+            { "moveSpeed", typeof(MoveSpeed) },
+            { "pierces", typeof(Pierces) },
+            { "spread", typeof(Spread) },
         };
     }
 

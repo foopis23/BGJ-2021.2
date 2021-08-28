@@ -5,6 +5,8 @@ namespace Modifiers
 {
     public abstract class AbstractEventFilterModifier<T> : AbstractModifier<T> where T : EventContext
     {
+        public AbstractEventFilterModifier(int strength) : base(strength) {}
+
         public override void Activate()
         {
             EventSystem.Current.RegisterFilterListener<T>(OnTrigger);

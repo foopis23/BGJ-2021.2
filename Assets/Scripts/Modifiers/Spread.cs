@@ -1,11 +1,12 @@
 ﻿namespace Modifiers
 {
-    public class GrapeShot : AbstractEventFilterModifier<BeforeFireContext>
+    public class Spread : AbstractEventFilterModifier<BeforeFireContext>
     {
+        public Spread(int strength) : base(strength) {}
+
         protected override BeforeFireContext OnSuccess(BeforeFireContext e)
         {
-            e.BulletCount += 2;
-            e.Spread += 5;
+            e.Spread += _strength;
             return e;
         }
 
