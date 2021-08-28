@@ -139,9 +139,8 @@ public class Projectile : MonoBehaviour
 
         if (explosionPower > 0)
         {
-            const float damageMultiplier = 3.0f;
-            const float rangeMultiplier = 3.0f;
-            EventSystem.Current.FireEvent(new ExplosionEventContext(){Damage = damageMultiplier * explosionPower, Range = rangeMultiplier * explosionPower, Pos = transform.position});
+
+            EventSystem.Current.FireEvent(new ExplosionEventContext(explosionPower){Pos = transform.position});
         }
         
         EventSystem.Current.FireEvent(new OnExpireContext {Projectile = this, ExpiredOnHit = onHit});
@@ -186,15 +185,24 @@ public class ExplosionPowerFilterContext : EventContext
 
 public class ExplosionEventContext : EventContext
 {
-    public float Range;
-    public float Damage;
+    private readonly float _range;
+    private readonly float _damage;
     public Vector3 Pos;
+
+    public ExplosionEventContext(int powerLevel)
+    {
+        const float damageMultiplier = 3.0f;
+        const float rangeMultiplier = 3.0f;
+        
+        _damage = powerLevel * damageMultiplier;
+        _range = powerLevel * rangeMultiplier;
+    }
 
     public float GetDamage(Vector3 entityPos)
     {
         var distance = Vector3.Distance(Pos, entityPos);
-        if (distance >= Range) return 0.0f;
-        var rangeRt = Mathf.Sqrt(Range);
-        return (rangeRt - Mathf.Sqrt(Range)) / rangeRt * Damage;
+        if (distance >= _range) return 0.0f;
+        var rangeRt = Mathf.Sqrt(_range);
+        return (rangeRt - Mathf.Sqrt(_range)) / rangeRt * _damage;
     }
 }
