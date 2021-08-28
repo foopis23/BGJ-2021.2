@@ -14,5 +14,10 @@ namespace Modifiers
 
             return e;
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Fire Damage ${Strength}: Sets all hit targets on fire.";
+        }
     }
 }

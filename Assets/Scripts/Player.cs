@@ -11,11 +11,15 @@ public class Player : LivingEntity
     [FormerlySerializedAs("statusEffectTickSpeed")] public float passiveModifierTickSpeed = 20.0f;
     private float _lastPassiveModifierTick;
 
+    void Awake()
+    {
+        Inventory = new CardInventory(inventorySize);
+    }
+
     private void Start()
     {
         _lastPassiveModifierTick = 0;
         Init();
-        Inventory = new CardInventory(inventorySize);
         baseWalkSpeed = playerMovement.moveSpeed;
         baseStrafeSpeed = playerMovement.sideStrafeSpeed;
         baseMoveAcceleration = playerMovement.runAcceleration;

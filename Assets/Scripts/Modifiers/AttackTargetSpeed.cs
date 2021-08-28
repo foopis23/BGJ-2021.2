@@ -13,5 +13,10 @@ namespace Modifiers
 
             return e;
         }
+
+        public override string GetFlavorText()
+        {
+            return $"Attack Target Speed ${Strength}: Sets movement speed for all hit targets.";
+        }
     }
 }

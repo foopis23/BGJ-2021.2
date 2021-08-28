@@ -10,9 +10,11 @@ public class CardObject : ScriptableObject
     public string[] ModifierNames;
 
     public IModifier[] Modifiers { get; private set; }
+    public float ChaosLevel { get; set; }
 
-    void Awake()
+    public void Init()
     {
+        ChaosLevel = 0f;
         Modifiers = new IModifier[ModifierNames.Length];
         for(int i = 0; i < ModifierNames.Length; i++)
         {

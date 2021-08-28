@@ -29,7 +29,7 @@ namespace Modifiers
 
         public static IModifier CreateModifierFromName(string name, int strength)
         {
-            if(!dict.ContainsKey(name)) return null;
+            if(!dict.ContainsKey(name)) throw new Exception("Invalid modifier name.");
             var modifier = (IModifier) Activator.CreateInstance(dict[name]);
             modifier.SetStrength(strength);
             return modifier;

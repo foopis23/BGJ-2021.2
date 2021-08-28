@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CardInventory
 {
-    public CardObject[] _cards;
+    public CardObject[] Cards;
+    public float Chaosity;
     public float TickSpeed;
     private float _lastTick;
     
     public CardInventory(int inventorySize, float tickSpeed = 1.0f)
     {
-        _cards = new CardObject[inventorySize];
+        Cards = new CardObject[inventorySize];
         TickSpeed = tickSpeed;
         _lastTick = 0;
     }
@@ -22,9 +23,9 @@ public class CardInventory
     public bool Equip(CardObject card, int slot = -1)
     {
         if (slot == -1) {
-            for (var i = 0; i < _cards.Length; i++)
+            for (var i = 0; i < Cards.Length; i++)
             {
-                if (_cards[i] != null) continue;
+                if (Cards[i] != null) continue;
                 
                 SwapSlot(card, i);
                 return true;
@@ -33,7 +34,7 @@ public class CardInventory
             return false;
         }
 
-        if (slot < 0 || slot > _cards.Length) throw new Exception("Inventory Slot Out Of Bounds");
+        if (slot < 0 || slot > Cards.Length) throw new Exception("Inventory Slot Out Of Bounds");
 
         SwapSlot(card, slot);
         return true;
@@ -41,24 +42,24 @@ public class CardInventory
 
     public bool UnEquip(int slot)
     {
-        if (slot < 0 || slot > _cards.Length) throw new Exception("Inventory Slot Out Of Bounds");
+        if (slot < 0 || slot > Cards.Length) throw new Exception("Inventory Slot Out Of Bounds");
 
-        if (_cards[slot] == null) return false;
+        if (Cards[slot] == null) return false;
         
-        foreach(var modifier in _cards[slot].Modifiers)
+        foreach(var modifier in Cards[slot].Modifiers)
         {
             modifier.Deactivate();
         }
 
-        _cards[slot] = null;
+        Cards[slot] = null;
         return true;
     }
 
     private void SwapSlot(CardObject card, int slot)
     {
         ClearSlot(slot);
-        _cards[slot] = card;
-        foreach(var modifier in _cards[slot].Modifiers)
+        Cards[slot] = card;
+        foreach(var modifier in Cards[slot].Modifiers)
         {
             modifier.Activate();
         }
@@ -66,28 +67,33 @@ public class CardInventory
 
     private void ClearSlot(int slot)
     {
-        if (_cards[slot] != null)
+        if (Cards[slot] != null)
         {
-            foreach(var modifier in _cards[slot].Modifiers)
+            foreach(var modifier in Cards[slot].Modifiers)
             {
                 modifier.Deactivate();
             }
         }
 
-        _cards[slot] = null;
+        Cards[slot] = null;
     }
 
     public void Update()
     {
         if (!(Time.time - _lastTick > TickSpeed)) return;
         
-        foreach (var card in _cards)
+        foreach (var card in Cards)
         {
             if(card != null)
             {
                 foreach(var modifier in card.Modifiers)
                 {
                     modifier?.Update();
+                }
+
+                if (UnityEngine.Random.Range(0.0f, 1.0f) < Chaosity)
+                {
+                    card.ChaosLevel = Mathf.Min(1.0f, card.ChaosLevel + 0.01f);
                 }
             }
         }
