@@ -111,8 +111,10 @@ MonoBehaviour:
   IsAlive: 1
   attackDelay: 0.2
   attackRange: 2
-  attackDamage: 100
+  attackDamage: 10
   animator: {fileID: 1670131772642602660}
+  collider: {fileID: 8041126683582689483}
+  corpseStayingPower: 20
 --- !u!195 &3649290192713331920
 NavMeshAgent:
   m_ObjectHideFlags: 0

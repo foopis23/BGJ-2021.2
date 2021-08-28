@@ -12,7 +12,9 @@ public class Enemy : LivingEntity
     public float attackRange;
     public float attackDamage;
     [FormerlySerializedAs("Animator")] public Animator animator;
-
+    public Collider collider;
+    public int corpseStayingPower = 30;
+    
     // private fields
     private NavMeshAgent _navMeshAgent;
     private GameObject _attackTarget;
@@ -43,7 +45,7 @@ public class Enemy : LivingEntity
             animator.Play("walk");
         }
 
-        if(Vector3.Distance(transform.position, aggroTarget.transform.position) < attackRange && !isAttacking) {
+        if (Vector3.Distance(transform.position, aggroTarget.transform.position) < attackRange && !isAttacking) {
             animator.Play("attack");
             isAttacking = true;
             _attackTarget = aggroTarget;
@@ -53,8 +55,14 @@ public class Enemy : LivingEntity
 
     protected override void OnDeath()
     {
-        animator.Play("death");
         _navMeshAgent.enabled = false;
+        animator.Play("death");
+        collider.enabled = false;
+        
+        EventSystem.Current.CallbackAfter(() =>
+        {
+            Destroy(gameObject);
+        }, corpseStayingPower * 1000);
     }
 
     private void Attack()
@@ -65,6 +73,7 @@ public class Enemy : LivingEntity
             !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
         
         var livingEntity = _attackTarget.GetComponent<LivingEntity>();
+        
         if(livingEntity != null)
         {
             livingEntity.Damage(attackDamage);
