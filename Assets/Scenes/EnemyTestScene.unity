@@ -388,8 +388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 51816300}
-  HealthBarRed: {fileID: 1508152388}
-  HealthBarGreen: {fileID: 21430716}
+  healthBarRed: {fileID: 1508152388}
+  healthBarGreen: {fileID: 21430716}
+  damageTickDuration: 0.1
 --- !u!1 &422918811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1047,14 @@ PrefabInstance:
     - target: {fileID: 3649290192713331886, guid: a79cab7cd66f61c41bf61d63402a5587, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649290192713331887, guid: a79cab7cd66f61c41bf61d63402a5587, type: 3}
+      propertyPath: attackDelay
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649290192713331887, guid: a79cab7cd66f61c41bf61d63402a5587, type: 3}
+      propertyPath: attackEndDelay
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 3649290192713331921, guid: a79cab7cd66f61c41bf61d63402a5587, type: 3}
       propertyPath: m_Name

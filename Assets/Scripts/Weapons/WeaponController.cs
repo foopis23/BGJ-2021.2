@@ -6,17 +6,19 @@ namespace Weapons
 {
     public class WeaponController : MonoBehaviour
     {
+        // editor fields
+        public float inputBufferDuration;
         public Animator shootAnimator;
         public Animator reloadAnimator;
         public Animator equipAnimator;
-        
         public Transform bulletSpawnPoint;
         public GameObject weaponObject;
-        private IWeapon _weapon;
 
+        // private fields
+        private IWeapon _weapon;
         private bool _enabled = true;
-        private bool _queuedFire = false;
-        private bool _queuedReload = false;
+        private float _queuedFireTime;
+        private float _queuedReloadTime;
 
         public void Start()
         {
@@ -33,11 +35,14 @@ namespace Weapons
             if (!_enabled) return;
             if (_weapon == null) return;
 
-            if ((Input.GetButtonDown("Fire1") || _queuedFire) && _weapon.CanFire())
+            if ((Input.GetButtonDown("Fire1") || Time.time - _queuedFireTime < inputBufferDuration) && _weapon.CanFire())
             {
                 if(_weapon.IsBusy())
                 {
-                    _queuedFire = true;
+                    if(Input.GetButtonDown("Fire1"))
+                    {
+                        _queuedFireTime = Time.time;
+                    }
                 }
                 else
                 {
@@ -46,15 +51,23 @@ namespace Weapons
                     shootAnimator.gameObject.SetActive(true);
                     equipAnimator.gameObject.SetActive(false);
                     shootAnimator.Play("shoot");
-                    _queuedFire = false;
+                    if(!_weapon.CanFire())
+                    {
+                        _queuedReloadTime = 1000000;
+                    }
+
+                    _queuedFireTime = 0;
                 }
             }
 
-            if ((Input.GetButtonDown("Reload") || _queuedReload) && _weapon.CanReload())
+            if ((Input.GetButtonDown("Reload") || Time.time - _queuedReloadTime < inputBufferDuration) && _weapon.CanReload())
             {
                 if(_weapon.IsBusy())
                 {
-                    _queuedReload = true;
+                    if(Input.GetButtonDown("Reload"))
+                    {
+                        _queuedReloadTime = Time.time;
+                    }
                 }
                 else
                 {
@@ -63,7 +76,7 @@ namespace Weapons
                     shootAnimator.gameObject.SetActive(false);
                     equipAnimator.gameObject.SetActive(false);
                     reloadAnimator.Play("reload");
-                    _queuedReload = false;
+                    _queuedReloadTime = 0;
                 }
             }
         }

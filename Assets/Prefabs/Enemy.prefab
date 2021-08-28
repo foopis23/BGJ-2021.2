@@ -109,8 +109,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 20
   IsAlive: 1
-  attackDelay: 0.2
-  attackRange: 2
+  attackCooldown: 1
+  attackDamageDelay: 0.25
+  attackRange: 4
   attackDamage: 10
   animator: {fileID: 1670131772642602660}
   collider: {fileID: 8041126683582689483}

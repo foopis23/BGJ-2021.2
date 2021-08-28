@@ -355,6 +355,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   IsAlive: 1
+  playerMovement: {fileID: 0}
+  inventorySize: 5
+  statusEffectTickSpeed: 20
 --- !u!114 &1202004756380482706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3421f2e3d2e94ff6b0041e906a9988ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputBufferDuration: 0.2
   shootAnimator: {fileID: 1678526541958118128}
   reloadAnimator: {fileID: 2649023601055382695}
   equipAnimator: {fileID: 8238410467156995186}
@@ -508,6 +512,8 @@ MonoBehaviour:
   maxAmmo: 6
   fireRate: 0.3
   reloadTime: 3.25
+  baseBulletCount: 1
+  baseSpread: 0
   bulletPrefab: {fileID: 6306396568100681037, guid: d515d81359c23864e8fd1435e41b6487, type: 3}
 --- !u!1001 &2253849491440773017
 PrefabInstance:

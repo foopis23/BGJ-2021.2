@@ -8,7 +8,8 @@ using UnityEngine.Serialization;
 public class Enemy : LivingEntity
 {
     // editor fields
-    public float attackDelay;
+    public float attackCooldown;
+    public float attackDamageDelay;
     public float attackRange;
     public float attackDamage;
     [FormerlySerializedAs("Animator")] public Animator animator;
@@ -49,7 +50,7 @@ public class Enemy : LivingEntity
             animator.Play("attack");
             isAttacking = true;
             _attackTarget = aggroTarget;
-            EventSystem.Current.CallbackAfter(Attack, (int) (attackDelay * 1000));
+            EventSystem.Current.CallbackAfter(Attack, (int) (attackDamageDelay * 1000));
         }
     }
 
@@ -67,10 +68,12 @@ public class Enemy : LivingEntity
 
     private void Attack()
     {
-        isAttacking = false;
-        if (!IsAlive) return;
-        if (_attackTarget == null ||
-            !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
+        EventSystem.Current.CallbackAfter(() => 
+        {
+            isAttacking = false;
+        }, (int) ((attackCooldown - attackDamageDelay) * 1000));
+
+        if (!IsAlive || _attackTarget == null || !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
         
         var livingEntity = _attackTarget.GetComponent<LivingEntity>();
         

@@ -27,7 +27,7 @@ public abstract class LivingEntity : MonoBehaviour
         EventSystem.Current.UnregisterEventListener<ExplosionEventContext>(ExplosionListener);
     }
 
-    public void Damage(float damage)
+    public virtual void Damage(float damage)
     {
         if(IsAlive)
         {
@@ -38,15 +38,14 @@ public abstract class LivingEntity : MonoBehaviour
                 IsAlive = false;
                 OnDeath();
             }
+
+            Health = Mathf.Min(MaxHealth, Health);
         }
     }
 
     public void Heal(float healing)
     {
-        if(IsAlive)
-        {
-            Health = Mathf.Min(MaxHealth, Health + healing);
-        }
+        Damage(-healing);
     }
 
     protected virtual void OnDeath() {}
