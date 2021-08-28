@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5509131043555008641}
   - component: {fileID: 2911424869933508924}
   m_Layer: 11
-  m_Name: AI detection
+  m_Name: detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

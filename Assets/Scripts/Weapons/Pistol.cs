@@ -15,20 +15,21 @@ namespace Weapons
 
         public GameObject bulletPrefab;
 
-        private float _currentAmmo; // how much ammo currently
         private float _lastFire = 0.0f; // time the gun was fired last
         private float _lastReload = 0.0f; // last time the gun was reloaded
 
+        public float currentAmmo { get; private set; } // how much ammo currently
+
         private void Start()
         {
-            _currentAmmo = maxAmmo;
+            currentAmmo = maxAmmo;
         }
 
         public bool Fire(Transform spawnPoint)
         {
             if (!CanFire() || IsBusy()) return false;
             _lastFire = Time.time;
-            _currentAmmo--;
+            currentAmmo--;
 
             var filtered = EventSystem.Current.FireFilter<BeforeFireContext>(
                 new BeforeFireContext(this){BulletCount =  baseBulletCount, Spread = baseSpread}
@@ -57,18 +58,18 @@ namespace Weapons
         {
             if (!CanReload() || IsBusy()) return false;
             _lastReload = Time.time;
-            _currentAmmo = maxAmmo;
+            currentAmmo = maxAmmo;
             return true;
         }
 
         public bool CanFire()
         {
-            return _currentAmmo > 0;
+            return currentAmmo > 0;
         }
 
         public bool CanReload()
         {
-            return _currentAmmo < maxAmmo;
+            return currentAmmo < maxAmmo;
         }
 
         public bool IsBusy()

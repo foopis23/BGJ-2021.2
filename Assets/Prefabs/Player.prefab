@@ -376,6 +376,7 @@ MonoBehaviour:
   equipAnimator: {fileID: 8238410467156995186}
   bulletSpawnPoint: {fileID: 1004581441988679349}
   weaponObject: {fileID: 9021727717844621359}
+  ammoText: {fileID: 0}
 --- !u!95 &1678526541958118128
 Animator:
   serializedVersion: 3

@@ -1,6 +1,7 @@
 ﻿using CallbackEvents;
 using UnityEngine;
 using UnityEngine.Serialization;
+using TMPro;
 
 namespace Weapons
 {
@@ -13,6 +14,7 @@ namespace Weapons
         public Animator equipAnimator;
         public Transform bulletSpawnPoint;
         public GameObject weaponObject;
+        public TextMeshProUGUI ammoText;
 
         // private fields
         private IWeapon _weapon;
@@ -26,6 +28,7 @@ namespace Weapons
             reloadAnimator.gameObject.SetActive(false);
             shootAnimator.gameObject.SetActive(true);
             equipAnimator.gameObject.SetActive(false);
+            ammoText.text = _weapon.currentAmmo.ToString();
             
             EventSystem.Current.RegisterEventListener<OnPlayerDeathContext>((e) => _enabled = false);
         }
@@ -51,6 +54,7 @@ namespace Weapons
                     shootAnimator.gameObject.SetActive(true);
                     equipAnimator.gameObject.SetActive(false);
                     shootAnimator.Play("shoot");
+                    ammoText.text = _weapon.currentAmmo.ToString();
                     if(!_weapon.CanFire())
                     {
                         _queuedReloadTime = 1000000;
@@ -76,6 +80,10 @@ namespace Weapons
                     shootAnimator.gameObject.SetActive(false);
                     equipAnimator.gameObject.SetActive(false);
                     reloadAnimator.Play("reload");
+                    EventSystem.Current.CallbackAfter(() => {
+                        ammoText.text = _weapon.currentAmmo.ToString();
+                    }, 2600);
+
                     _queuedReloadTime = 0;
                 }
             }
