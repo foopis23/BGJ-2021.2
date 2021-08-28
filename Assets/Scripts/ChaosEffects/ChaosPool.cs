@@ -37,7 +37,7 @@ namespace ChaosEffects
             _onHitEffects[rand].OnTrigger(epicFail);
         }
 
-        public static void OnFail(PlayerStatusEffectContext epicFail)
+        public static void OnFail(OnPlayerPassiveModifierTick epicFail)
         {
             if (!_inited) Init();
             if (_onPassiveEffects.Length < 1) return;

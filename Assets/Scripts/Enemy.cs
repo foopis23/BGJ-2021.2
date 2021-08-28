@@ -24,8 +24,8 @@ public class Enemy : LivingEntity
 
     private void Start()
     {
-        InitEvent();
-        Heal(MaxHealth);
+        Init();
+        
         aggroTarget = null;
         isAttacking = false;
 
@@ -55,8 +55,10 @@ public class Enemy : LivingEntity
     protected override void OnDeath()
     {
         _navMeshAgent.enabled = false;
-        animator.Play("death");
+        DeInit();
         collider.enabled = false;
+        
+        animator.Play("death");
         
         EventSystem.Current.CallbackAfter(() =>
         {
