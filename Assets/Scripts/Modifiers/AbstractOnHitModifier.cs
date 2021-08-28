@@ -1,4 +1,4 @@
-﻿using ChaosEffects;
+using ChaosEffects;
 
 namespace Modifiers
 {

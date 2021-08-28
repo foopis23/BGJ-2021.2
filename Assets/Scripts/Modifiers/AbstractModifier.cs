@@ -5,8 +5,14 @@ namespace Modifiers
 {
     public abstract class AbstractModifier<T> : IModifier where T : EventContext
     {
+        public int Strength;
         public float Corruption = 0.1f;
-        protected  float Instability = 0.0f;
+        protected float Instability = 0.0f;
+
+        public void SetStrength(int strength)
+        {
+            Strength = strength;
+        }
         
         public abstract void Activate();
 

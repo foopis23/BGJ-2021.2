@@ -7,7 +7,7 @@ public class Player : LivingEntity
 {
     public CPMPlayer playerMovement;
     public int inventorySize = 5;
-    public ModifierInventory Inventory;
+    public CardInventory Inventory;
     [FormerlySerializedAs("statusEffectTickSpeed")] public float passiveModifierTickSpeed = 20.0f;
     private float _lastPassiveModifierTick;
 
@@ -15,7 +15,7 @@ public class Player : LivingEntity
     {
         _lastPassiveModifierTick = 0;
         Init();
-        Inventory = new ModifierInventory(inventorySize);
+        Inventory = new CardInventory(inventorySize);
     }
 
     private void Update()
