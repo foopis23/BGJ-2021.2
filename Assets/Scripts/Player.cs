@@ -27,11 +27,6 @@ public class Player : LivingEntity
         
         Heal(MaxHealth);
         Inventory = new ModifierInventory(inventorySize);
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
-        Inventory.Equip(new GrapeShot());
     }
 
     private void Update()

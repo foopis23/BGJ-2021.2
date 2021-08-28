@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using CallbackEvents;
@@ -17,6 +18,8 @@ public class Projectile : MonoBehaviour
     [FormerlySerializedAs("Pierces")] public int pierces;
     [FormerlySerializedAs("MinPierces")] public int minPierces;
     // [FormerlySerializedAs("IsGrapeShot")] public bool isGrapeShot = false;
+
+    public LayerMask projectileLayerMask;
 
     // Private Fields
     private float _distanceTraveled;
@@ -48,8 +51,9 @@ public class Projectile : MonoBehaviour
         bool hitSuccess;
         do
         {
-            hitSuccess = Physics.Raycast(projectileTransform.position, projectileTransform.forward, out var hit, targetDistance) && hit.distance < range - _distanceTraveled;
+            hitSuccess = Physics.Raycast(projectileTransform.position, projectileTransform.forward, out var hit, targetDistance, projectileLayerMask) && hit.distance < range - _distanceTraveled;
             if (!hitSuccess) continue;
+            
             var hitObject = hit.collider.gameObject;
             if(hitObject.layer == LayerMask.NameToLayer("Level"))
             {
@@ -89,7 +93,11 @@ public class Projectile : MonoBehaviour
                     return;
                 }
             }
-
+            else
+            {
+                throw new Exception("If you reach this, it means your layer mask is including to many layers. ahaha");
+            }
+            
             projectileTransform.position += projectileTransform.forward * hit.distance;
             _distanceTraveled += hit.distance;
             targetDistance -= hit.distance;
