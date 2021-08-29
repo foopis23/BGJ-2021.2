@@ -16,6 +16,9 @@ public class Enemy : LivingEntity
 
     public GameObject[] itemDropPrefabs;
     public float dropRate = 0.15f;
+    public AudioSource attackSound;
+    public AudioSource damageSound;
+    public AudioSource deathSound;
     
     // private fields
     private NavMeshAgent _navMeshAgent;
@@ -60,12 +63,16 @@ public class Enemy : LivingEntity
 
     protected override void OnDeath()
     {
+        base.OnDeath();
+
         _navMeshAgent.enabled = false;
         DeInit();
         collider.enabled = false;
         
         animator.Play("death");
 
+        deathSound.Play();
+        
         EventSystem.Current.CallbackAfter(() =>
         {
             Destroy(gameObject);
@@ -84,12 +91,15 @@ public class Enemy : LivingEntity
             isAttacking = false;
         }, (int) ((attackCooldown - attackDamageDelay) * 1000));
 
+        attackSound.Play();
+
         if (!IsAlive || _attackTarget == null || !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
         
         var livingEntity = _attackTarget.GetComponent<LivingEntity>();
         
         if(livingEntity != null)
         {
+            damageSound.Play();
             livingEntity.Damage(attackDamage);
             _attackTarget = null;
         }
