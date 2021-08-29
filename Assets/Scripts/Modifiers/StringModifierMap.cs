@@ -23,7 +23,8 @@ namespace Modifiers
                 { "healFromHit", typeof(HealFromHit)},
                 { "AttackTargetSpeed", typeof(AttackTargetSpeed)},
                 { "regenerationAmount", typeof(RegenerationAmount)},
-                { "attackTargetRegenerationAmount", typeof(AttackTargetRegenerationAmount)}
+                { "attackTargetRegenerationAmount", typeof(AttackTargetRegenerationAmount)},
+                { "attackTargetDamageReduction", typeof(attackTargetDamageReduction)}
             };
         }
 
