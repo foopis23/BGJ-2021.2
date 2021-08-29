@@ -9,7 +9,7 @@
 
         public override string GetFlavorText()
         {
-            return $"Regeneration {Strength}: Changes the regeneration amount for the player.";
+            return $"Regeneration {Strength}: Changes player's health regeneration.";
         }
     }
 }
