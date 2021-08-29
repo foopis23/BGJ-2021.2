@@ -11,7 +11,7 @@ namespace Modifiers
 
         public override string GetFlavorText()
         {
-            return $"Bounce ${Strength}: Changes the amount of wall bounces for a projectile.";
+            return $"Bounce {Strength}: Changes the amount of wall bounces for a projectile.";
         }
     }
 }

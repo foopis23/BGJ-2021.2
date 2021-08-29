@@ -9,7 +9,7 @@
 
         public override string GetFlavorText()
         {
-            return $"Pierce ${Strength}: Change the amount of targets a projectile can pierce.";
+            return $"Pierce {Strength}: Change the amount of targets a projectile can pierce.";
         }
     }
 }
