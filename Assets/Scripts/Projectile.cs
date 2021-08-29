@@ -21,6 +21,9 @@ public class Projectile : MonoBehaviour
     
     public LayerMask projectileLayerMask;
     public int baseExplosionPower = 0;
+
+    public GameObject LivingHitParticlePrefab;
+    public GameObject NonLivingHitParticlePrefab;
     
      // used for modifier
     [NonSerialized] public LivingEntity Dad;
@@ -76,6 +79,9 @@ public class Projectile : MonoBehaviour
                 if(_totalBounces++ >= bounces)
                 {
                     Expire(true);
+                    var particleObject = Instantiate(NonLivingHitParticlePrefab);
+                    particleObject.transform.position = hit.point;
+                    particleObject.transform.forward = hit.normal;
                     return;
                 }
                 
@@ -93,6 +99,9 @@ public class Projectile : MonoBehaviour
                 if(_totalPierces++ >= pierces)
                 {
                     Expire(true);
+                    var particleObject = Instantiate(LivingHitParticlePrefab);
+                    particleObject.transform.position = hit.point;
+                    particleObject.transform.forward = hit.normal;
                     return;
                 }
             }
@@ -107,6 +116,9 @@ public class Projectile : MonoBehaviour
                 if(_totalPierces++ >= pierces)
                 {
                     Expire(true);
+                    var particleObject = Instantiate(LivingHitParticlePrefab);
+                    particleObject.transform.position = hit.point;
+                    particleObject.transform.forward = hit.normal;
                     return;
                 }
             }

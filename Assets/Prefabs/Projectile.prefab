@@ -153,6 +153,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 263424
   baseExplosionPower: 0
+  LivingHitParticlePrefab: {fileID: 1384706204280943282, guid: f42d9f426e1222c41bdc7b12fab74bce, type: 3}
+  NonLivingHitParticlePrefab: {fileID: 2671361710660706309, guid: 4eaab26fec06008469bc9f54bbd7e7b5, type: 3}
 --- !u!1001 &7910494213206652678
 PrefabInstance:
   m_ObjectHideFlags: 0
