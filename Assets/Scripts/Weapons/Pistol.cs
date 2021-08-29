@@ -32,7 +32,7 @@ namespace Weapons
             currentAmmo--;
 
             var filtered = EventSystem.Current.FireFilter<BeforeFireContext>(
-                new BeforeFireContext(this){BulletCount =  baseBulletCount, Spread = baseSpread}
+                new BeforeFireContext(this){BulletCount =  baseBulletCount, Spread = baseSpread, Shooter = shooter}
                 );
 
             var bulletCount = Mathf.Max(baseBulletCount, filtered.BulletCount);
@@ -82,6 +82,7 @@ namespace Weapons
 
 public class BeforeFireContext : EventContext
 {
+    public LivingEntity Shooter;
     public readonly IWeapon Weapon;
     public int BulletCount;
     public float Spread;

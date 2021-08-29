@@ -13,10 +13,10 @@ namespace ChaosEffects
         private static void Init()
         {
             _inited = true;
-            _onShootEffects = new IOnShootEffect[]{new ExplodeInFaceEffect()};
-            _onHitEffects = new IOnExpireEffect[] { };
-            _onPassiveEffects = new IOnPassiveEffect[]{ };
-            _onBeforeShootEffects = new IOnBeforeShootEffect[] { };
+            _onShootEffects = new IOnShootEffect[]{new ExplodeInFaceEffect(), new BurstIntoFlames(), new SlownessEffectOnShoot(), new PoisonedEffectOnShoot()};
+            _onHitEffects = new IOnExpireEffect[] { new BurstIntoFlamesOnHit(), new SlownessEffectOnExpire(), new PoisonedEffectOnHit()};
+            _onPassiveEffects = new IOnPassiveEffect[]{ new BurstIntoFlamesPassive(), new SlownessEffectOnPassive(), new PoisonedEffectOnPassive()};
+            _onBeforeShootEffects = new IOnBeforeShootEffect[] { new ExplodeInFaceBeforeShoot(), new SlownessEffectBeforeShoot(), new BurstIntoFlameBeforeShoot(), new PoisonedEffectBeforeShoot() };
         }
 
         public static void OnFail(OnFireContext epicFail)
@@ -46,7 +46,7 @@ namespace ChaosEffects
             _onPassiveEffects[rand].OnTrigger(epicFail);
         }
 
-        public static void OnFail(IOnBeforeShootEffect epicFail)
+        public static void OnFail(BeforeFireContext epicFail)
         {
             if (!_inited) Init();
             if (_onBeforeShootEffects.Length < 1) return;
