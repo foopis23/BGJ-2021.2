@@ -171,7 +171,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 263479
+    m_Bits: 38012215
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -433,6 +433,8 @@ MonoBehaviour:
   inventorySize: 5
   passiveModifierTickSpeed: 20
   startCards: []
+  cardDeck: {fileID: 0}
+  purchaseCardPoints: 0
 --- !u!114 &1202004756380482706
 MonoBehaviour:
   m_ObjectHideFlags: 0
