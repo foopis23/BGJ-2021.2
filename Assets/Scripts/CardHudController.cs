@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +15,8 @@ public class CardHudController : MonoBehaviour
     public GameObject heldCardsObject;
     public GameObject newCard;
     public GameObject cardPrefab;
+    public CardDeck cardDeck;
+    public TMP_Text coinText;
 
     // private fields
     private CardInventory cardInventory;
@@ -50,12 +50,52 @@ public class CardHudController : MonoBehaviour
 
     void Update()
     {
+        if (player.purchaseCardPoints > 0)
+        {
+            coinText.text = $"Press Q to Buy Card ({player.purchaseCardPoints})";
+        }
+        else
+        {
+            coinText.text = "Find more coins to buy cards.";
+        }
+        
+        if (cardDeck.PurchasedCard != null)
+        {
+            newCard.SetActive(true);
+            newCard.gameObject.transform.Find("Icon").GetComponent<RawImage>().texture = cardDeck.PurchasedCard.Icon;
+            newCard.gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = cardDeck.PurchasedCard.Name;
+            newCard.gameObject.transform.Find("Info Text").GetComponent<TextMeshProUGUI>().text =
+                cardDeck.PurchasedCard.FlavorText;
+            newCard.gameObject.transform.Find("Chaos Percent").GetComponent<TextMeshProUGUI>().text = ((int) (cardDeck.PurchasedCard.ChaosLevel * 100)).ToString() + "%";
+        }
+        else
+        {
+            newCard.SetActive(false);
+        }
         foreach(KeyCode keyCode in KeyCodeCardIndices.Keys)
         {
             if(Input.GetKeyDown(keyCode))
             {
-                selectedCard = KeyCodeCardIndices[keyCode];
-                selectTime = Time.time;
+                var cardIndex = KeyCodeCardIndices[keyCode];
+
+                if (cardDeck.PurchasedCard != null && cardIndex == selectedCard)
+                {
+                    cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
+                    cardDeck.PurchasedCard = null;
+                }
+                else
+                {
+                    if (cardInventory.Cards[cardIndex] != null)
+                    {
+                        selectedCard = cardIndex;
+                        selectTime = Time.time;
+                    }
+                    else if (cardDeck.PurchasedCard != null)
+                    {
+                        cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
+                        cardDeck.PurchasedCard = null;
+                    }
+                }
             }
         }
 

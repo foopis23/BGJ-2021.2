@@ -13,6 +13,12 @@ public class Enemy : LivingEntity
     [FormerlySerializedAs("Animator")] public Animator animator;
     public Collider collider;
     public int corpseStayingPower = 30;
+
+    public GameObject[] itemDropPrefabs;
+    public float dropRate = 0.15f;
+    public AudioSource attackSound;
+    public AudioSource damageSound;
+    public AudioSource deathSound;
     
     // private fields
     private NavMeshAgent _navMeshAgent;
@@ -57,16 +63,25 @@ public class Enemy : LivingEntity
 
     protected override void OnDeath()
     {
+        base.OnDeath();
+
         _navMeshAgent.enabled = false;
         DeInit();
         collider.enabled = false;
         
         animator.Play("death");
+
+        deathSound.Play();
         
         EventSystem.Current.CallbackAfter(() =>
         {
             Destroy(gameObject);
         }, corpseStayingPower * 1000);
+
+        if (Random.Range(0.0f, 1.0f) <= dropRate)
+        {
+            Instantiate(itemDropPrefabs[Random.Range(0, itemDropPrefabs.Length)], transform.position, Quaternion.identity);
+        }
     }
 
     private void Attack()
@@ -76,12 +91,15 @@ public class Enemy : LivingEntity
             isAttacking = false;
         }, (int) ((attackCooldown - attackDamageDelay) * 1000));
 
+        attackSound.Play();
+
         if (!IsAlive || _attackTarget == null || !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
         
         var livingEntity = _attackTarget.GetComponent<LivingEntity>();
         
         if(livingEntity != null)
         {
+            damageSound.Play();
             livingEntity.Damage(attackDamage);
             _attackTarget = null;
         }

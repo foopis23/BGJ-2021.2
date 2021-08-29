@@ -12,6 +12,9 @@ public class Player : LivingEntity
     private float _lastPassiveModifierTick;
 
     public CardObject[] startCards;
+    
+    public CardDeck cardDeck;
+    public int purchaseCardPoints;
 
     void Awake()
     {
@@ -36,6 +39,11 @@ public class Player : LivingEntity
 
     private void Update()
     {
+        if (Input.GetButtonDown("Buy Card"))
+        {
+            cardDeck.PurchaseCard(this);
+        }
+        
         playerMovement.moveSpeed = WalkSpeed;
         playerMovement.sideStrafeSpeed = StrafeSpeed;
         playerMovement.runAcceleration = MoveAcceleration;

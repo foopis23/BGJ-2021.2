@@ -38,29 +38,51 @@ public abstract class LivingEntity : MonoBehaviour
     [NonSerialized] public float StrafeSpeed;
     [NonSerialized] public float MoveAcceleration;
 
+    public GameObject FireParticlePrefab;
+    public GameObject PoisonParticlePrefab;
+
     // private properties
     private Dictionary<TickType, float> _tickDamage;
     private Dictionary<AbstractStatusEffect, float> _statusEffects;
     private float _lastRegeneration;
     private float _lastDamage;
+    private ParticleSystem fireParticle;
+    private ParticleSystem poisonParticle;
 
     public void ApplyStatusEffect(AbstractStatusEffect effect, float duration)
     {
-        _statusEffects[effect] = duration;
+        if(IsAlive)
+        {
+            _statusEffects[effect] = duration;
+        }
     }
 
     public void ApplyTickStatus(TickType type, float duration)
     {
-        if (_tickDamage.ContainsKey(type))
+        if(IsAlive)
         {
-            if (_tickDamage[type] < duration)
+            if (_tickDamage.ContainsKey(type))
+            {
+                if (_tickDamage[type] < duration)
+                {
+                    _tickDamage[type] = duration;
+                }
+            }
+            else
             {
                 _tickDamage[type] = duration;
             }
-        }
-        else
-        {
-            _tickDamage[type] = duration;
+
+            switch(type)
+            {
+                case TickType.Fire:
+                    fireParticle.Play();
+                    break;
+                
+                case TickType.Poison:
+                    poisonParticle.Play();
+                    break;
+            }
         }
     }
     
@@ -95,6 +117,8 @@ public abstract class LivingEntity : MonoBehaviour
     {
         _statusEffects = new Dictionary<AbstractStatusEffect, float>();
         _tickDamage = new Dictionary<TickType, float>();
+        fireParticle = Instantiate(FireParticlePrefab, transform).GetComponent<ParticleSystem>();
+        poisonParticle = Instantiate(PoisonParticlePrefab, transform).GetComponent<ParticleSystem>();
         Heal(MaxHealth);
         
         // set base shit
@@ -110,7 +134,12 @@ public abstract class LivingEntity : MonoBehaviour
         EventSystem.Current.UnregisterEventListener<ExplosionEventContext>(ExplosionListener);
         EventSystem.Current.UnregisterEventListener<TickHealthContext>(OnTickDamage);
     }
-    protected virtual void OnDeath() {}
+
+    protected virtual void OnDeath()
+    {
+        fireParticle.Stop();
+        poisonParticle.Stop();
+    }
 
     private void SetStats(float timeSinceLastTick)
     {
@@ -167,6 +196,17 @@ public abstract class LivingEntity : MonoBehaviour
                 if (_tickDamage[e.Type] > 0)
                 {
                     Damage(e.Damage);
+                }
+                else
+                {
+                    if(e.Type == TickType.Fire)
+                    {
+                        fireParticle.Stop();
+                    }
+                    else
+                    {
+                        poisonParticle.Stop();
+                    }
                 }
 
                 break;

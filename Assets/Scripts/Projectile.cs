@@ -82,6 +82,9 @@ public class Projectile : MonoBehaviour
                     var particleObject = Instantiate(NonLivingHitParticlePrefab);
                     particleObject.transform.position = hit.point;
                     particleObject.transform.forward = hit.normal;
+                    EventSystem.Current.CallbackAfter(() => {
+                        Destroy(particleObject);
+                    }, 1000);
                     return;
                 }
                 
@@ -102,6 +105,9 @@ public class Projectile : MonoBehaviour
                     var particleObject = Instantiate(LivingHitParticlePrefab);
                     particleObject.transform.position = hit.point;
                     particleObject.transform.forward = hit.normal;
+                    EventSystem.Current.CallbackAfter(() => {
+                        Destroy(particleObject);
+                    }, 1000);
                     return;
                 }
             }
@@ -119,6 +125,9 @@ public class Projectile : MonoBehaviour
                     var particleObject = Instantiate(LivingHitParticlePrefab);
                     particleObject.transform.position = hit.point;
                     particleObject.transform.forward = hit.normal;
+                    EventSystem.Current.CallbackAfter(() => {
+                        Destroy(particleObject);
+                    }, 1000);
                     return;
                 }
             }
@@ -232,7 +241,6 @@ public class ExplosionEventContext : EventContext
         if (distance >= Range) return 0.0f;
         var rangeRt = Mathf.Sqrt(Range);
         var distanceRt = Mathf.Sqrt(distance);
-        Debug.Log($"MADE IT HERE {distance} : {((rangeRt - distanceRt) / (rangeRt + distanceRt)) * Damage}\nDamage: {Damage} Range: {Range}");
         return ((rangeRt - distanceRt) / (rangeRt + distanceRt)) * Damage;
     }
 }
