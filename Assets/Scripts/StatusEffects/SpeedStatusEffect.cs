@@ -2,7 +2,7 @@
 {
     public class SpeedStatusEffect : AbstractStatusEffect
     {
-        private const float SpeedIncreasePercent = 0.2f;
+        private const float SpeedIncreasePercent = 0.1f;
         public SpeedStatusEffect(int level) : base(level) {}
 
         public override void StatFilter(LivingEntity e)

@@ -11,7 +11,7 @@ namespace Modifiers
 
         public override string GetFlavorText()
         {
-            return $"Damage Reduction ${Strength}: reduces incoming damage to player.";
+            return $"Damage Reduction {Strength}: reduces incoming damage to player.";
         }
     }
 }

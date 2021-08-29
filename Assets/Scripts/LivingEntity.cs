@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using CallbackEvents;
 using StatusEffects;
@@ -121,16 +122,25 @@ public abstract class LivingEntity : MonoBehaviour
         StrafeSpeed = baseStrafeSpeed;
         MoveAcceleration = baseMoveAcceleration;
 
-        foreach (var effect in _statusEffects.Keys)
+        var toRemove = new List<AbstractStatusEffect>();
+
+        for(var i=0; i < _statusEffects.Keys.Count; i++)
         {
-            _statusEffects[effect] -= timeSinceLastTick;
-            if (_statusEffects[effect] <= 0)
+            _statusEffects[_statusEffects.Keys.ToArray()[i]] -= timeSinceLastTick;
+            if (_statusEffects[_statusEffects.Keys.ToArray()[i]] <= 0)
             {
-                _statusEffects.Remove(effect);
+                toRemove.Add(_statusEffects.Keys.ToArray()[i]);
                 continue;
             }
             
-            effect.StatFilter(this);
+            Debug.Log(i);
+            
+            _statusEffects.Keys.ToArray()[i].StatFilter(this);
+        }
+
+        foreach (var effect in toRemove)
+        {
+            _statusEffects.Remove(effect);
         }
     }
     

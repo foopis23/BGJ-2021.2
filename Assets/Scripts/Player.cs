@@ -11,7 +11,7 @@ public class Player : LivingEntity
     [FormerlySerializedAs("statusEffectTickSpeed")] public float passiveModifierTickSpeed = 20.0f;
     private float _lastPassiveModifierTick;
 
-    public CardObject startCard;
+    public CardObject[] startCards;
 
     void Awake()
     {
@@ -20,25 +20,26 @@ public class Player : LivingEntity
 
     private void Start()
     {
-        _lastPassiveModifierTick = 0;
+        _lastPassiveModifierTick = -passiveModifierTickSpeed;
         Init();
         baseWalkSpeed = playerMovement.moveSpeed;
         baseStrafeSpeed = playerMovement.sideStrafeSpeed;
         baseMoveAcceleration = playerMovement.runAcceleration;
 
-        var card = (CardObject) Instantiate(startCard);
-        card.Init();
-        Inventory.Equip(card);
+        foreach (var obj in startCards)
+        {
+            var card = (CardObject) Instantiate(obj);
+            card.Init();
+            Inventory.Equip(card);
+        }
     }
 
     private void Update()
     {
-        /*
         playerMovement.moveSpeed = WalkSpeed;
         playerMovement.sideStrafeSpeed = StrafeSpeed;
         playerMovement.runAcceleration = MoveAcceleration;
-        */
-        
+
         if (Time.time - _lastPassiveModifierTick >= passiveModifierTickSpeed)
         {
             EventSystem.Current.FireEvent(new OnPlayerPassiveModifierTick(this, Time.time - _lastPassiveModifierTick));
@@ -66,7 +67,7 @@ public class OnPlayerPassiveModifierTick : EventContext
     public OnPlayerPassiveModifierTick(Player player, float tickTime)
     {
         Player = player;
-        this.TickTime = tickTime;
+        TickTime = tickTime;
     }
 }
 
