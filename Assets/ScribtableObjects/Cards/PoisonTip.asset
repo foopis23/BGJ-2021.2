@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PoisonTip
   m_EditorClassIdentifier: 
   Name: Poison Tip
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: a2032e2264d1a0d41974bce1bb854b7b, type: 3}
   ModifierNames:
   - poisonDamage 2
   - bulletCount -1

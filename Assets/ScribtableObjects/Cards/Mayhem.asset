@@ -17,4 +17,4 @@ MonoBehaviour:
   ModifierNames:
   - bounces 4
   - bulletCount 2
-  - spread 1
+  - spread 3
