@@ -21,7 +21,7 @@ namespace Modifiers
         private T OnTrigger(T e)
         {
             var rand = Random.Range(0.0f, 1.0f);
-            return rand > Card.ChaosLevel ? OnSuccess(e) : OnFailure(e);
+            return rand > (Card.ChaosLevel / Card.Modifiers.Length) ? OnSuccess(e) : OnFailure(e);
         }
     
         protected abstract T OnSuccess(T e);
