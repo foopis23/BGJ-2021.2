@@ -1,16 +1,11 @@
 ﻿namespace Modifiers
 {
-    public class BulletCount : AbstractEventFilterModifier<BeforeFireContext>
+    public class BulletCount : AbstractBeforeFireModifier
     {
         protected override BeforeFireContext OnSuccess(BeforeFireContext e)
         {
             e.BulletCount += Strength;
             return e;
-        }
-
-        protected override BeforeFireContext OnFailure(BeforeFireContext e)
-        {
-            throw new System.NotImplementedException();
         }
 
         public override string GetFlavorText()

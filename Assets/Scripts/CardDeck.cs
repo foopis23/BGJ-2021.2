@@ -17,6 +17,8 @@ public class CardDeck : MonoBehaviour
     public void PurchaseCard(Player player)
     {
         if (player.purchaseCardPoints < 1) return;
+        if (PurchasedCard != null) return;
+        
         player.purchaseCardPoints--;
         PurchasedCard = Instantiate(allCards[Random.Range(0, allCards.Length)]);
         PurchasedCard.Init();

@@ -6,7 +6,7 @@ namespace ChaosEffects
     {
         public void OnTrigger(OnFireContext ctx)
         {
-            EventSystem.Current.FireEvent(new ExplosionEventContext(4){Pos = ctx.Projectile.transform.position});
+            EventSystem.Current.FireEvent(new ExplosionEventContext(1){Pos = ctx.Projectile.transform.position});
         }
     }
 }
