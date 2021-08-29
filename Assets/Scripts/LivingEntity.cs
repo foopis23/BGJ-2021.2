@@ -137,8 +137,6 @@ public abstract class LivingEntity : MonoBehaviour
 
     protected virtual void OnDeath()
     {
-        Debug.Log("ASDF2");
-
         fireParticle.Stop();
         poisonParticle.Stop();
     }

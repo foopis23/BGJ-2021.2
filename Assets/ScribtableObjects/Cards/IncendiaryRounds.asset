@@ -16,5 +16,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   ModifierNames:
   - fireDamage 2
-  - poisonDamage -2
   - bulletCount -1

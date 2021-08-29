@@ -13,6 +13,10 @@ public class Enemy : LivingEntity
     [FormerlySerializedAs("Animator")] public Animator animator;
     public Collider collider;
     public int corpseStayingPower = 30;
+
+    public AudioSource attackSound;
+    public AudioSource damageSound;
+    public AudioSource deathSound;
     
     // private fields
     private NavMeshAgent _navMeshAgent;
@@ -57,7 +61,6 @@ public class Enemy : LivingEntity
 
     protected override void OnDeath()
     {
-        Debug.Log("ASDF");
         base.OnDeath();
 
         _navMeshAgent.enabled = false;
@@ -65,6 +68,7 @@ public class Enemy : LivingEntity
         collider.enabled = false;
         
         animator.Play("death");
+        deathSound.Play();
         
         EventSystem.Current.CallbackAfter(() =>
         {
@@ -79,12 +83,15 @@ public class Enemy : LivingEntity
             isAttacking = false;
         }, (int) ((attackCooldown - attackDamageDelay) * 1000));
 
+        attackSound.Play();
+
         if (!IsAlive || _attackTarget == null || !(Vector3.Distance(transform.position, _attackTarget.transform.position) < attackRange)) return;
         
         var livingEntity = _attackTarget.GetComponent<LivingEntity>();
         
         if(livingEntity != null)
         {
+            damageSound.Play();
             livingEntity.Damage(attackDamage);
             _attackTarget = null;
         }

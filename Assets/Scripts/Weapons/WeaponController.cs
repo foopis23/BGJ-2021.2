@@ -18,6 +18,10 @@ namespace Weapons
 
         public LivingEntity shooter;
 
+        public AudioSource shootSound;
+        public AudioSource reloadSound;
+        public AudioSource failSound;
+
         // private fields
         private IWeapon _weapon;
         private bool _enabled = true;
@@ -60,6 +64,7 @@ namespace Weapons
                     equipAnimator.gameObject.SetActive(false);
                     shootAnimator.Play("shoot");
                     _shootParticle.Play();
+                    shootSound.Play();
                     ammoText.text = _weapon.currentAmmo.ToString();
                     if(!_weapon.CanFire())
                     {
@@ -86,6 +91,7 @@ namespace Weapons
                     shootAnimator.gameObject.SetActive(false);
                     equipAnimator.gameObject.SetActive(false);
                     reloadAnimator.Play("reload");
+                    reloadSound.Play();
                     EventSystem.Current.CallbackAfter(() => {
                         ammoText.text = _weapon.currentAmmo.ToString();
                     }, 2600);
