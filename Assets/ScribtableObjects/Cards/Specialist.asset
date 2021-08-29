@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Specialist
   Icon: {fileID: 2800000, guid: 4bfa06e7c9764ef4e8f567bdbde3f6ef, type: 3}
   ModifierNames:
-  - explosive 5
+  - explosion 5
   - bounces -1
   - bulletCount -2
   - moveSpeed -2
