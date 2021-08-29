@@ -82,6 +82,9 @@ public class Projectile : MonoBehaviour
                     var particleObject = Instantiate(NonLivingHitParticlePrefab);
                     particleObject.transform.position = hit.point;
                     particleObject.transform.forward = hit.normal;
+                    EventSystem.Current.CallbackAfter(() => {
+                        Destroy(particleObject);
+                    }, 1000);
                     return;
                 }
                 
@@ -102,6 +105,9 @@ public class Projectile : MonoBehaviour
                     var particleObject = Instantiate(LivingHitParticlePrefab);
                     particleObject.transform.position = hit.point;
                     particleObject.transform.forward = hit.normal;
+                    EventSystem.Current.CallbackAfter(() => {
+                        Destroy(particleObject);
+                    }, 1000);
                     return;
                 }
             }
@@ -119,6 +125,9 @@ public class Projectile : MonoBehaviour
                     var particleObject = Instantiate(LivingHitParticlePrefab);
                     particleObject.transform.position = hit.point;
                     particleObject.transform.forward = hit.normal;
+                    EventSystem.Current.CallbackAfter(() => {
+                        Destroy(particleObject);
+                    }, 1000);
                     return;
                 }
             }
