@@ -4596,34 +4596,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2085791692, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_fontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085791692, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085791692, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085791693, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 256.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085791693, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 67.716
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085791693, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -511.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085791693, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 215.18
-      objectReference: {fileID: 0}
     - target: {fileID: 1650252862450821128, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -4716,10 +4688,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2072627767}
-    - target: {fileID: 3859940791567206501, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -132
-      objectReference: {fileID: 0}
     - target: {fileID: 5349972645670903512, guid: 34cbc321ef115d04d87b60a09f79b0d0, type: 3}
       propertyPath: player
       value: 
