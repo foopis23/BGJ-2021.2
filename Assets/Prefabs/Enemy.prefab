@@ -116,6 +116,8 @@ MonoBehaviour:
   baseHealthRegeneration: 0
   baseHealthRegenerationTickSpeed: 0
   baseHealthRegenerationDelay: 0
+  FireParticlePrefab: {fileID: 7386970781057664, guid: c3c7be56d1069e34e8616c4aeed24aad, type: 3}
+  PoisonParticlePrefab: {fileID: 8376086646717020458, guid: b175dd114df29ab4db885af3ac6bde1b, type: 3}
   attackCooldown: 1
   attackDamageDelay: 0.25
   attackRange: 4

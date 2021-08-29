@@ -57,6 +57,9 @@ public class Enemy : LivingEntity
 
     protected override void OnDeath()
     {
+        Debug.Log("ASDF");
+        base.OnDeath();
+
         _navMeshAgent.enabled = false;
         DeInit();
         collider.enabled = false;

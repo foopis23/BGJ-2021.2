@@ -6728,12 +6728,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
-      propertyPath: inventorySize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
       propertyPath: startCards.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
       propertyPath: startCards.Array.data[0]
@@ -6742,7 +6738,7 @@ PrefabInstance:
     - target: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
       propertyPath: startCards.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 12107ef2224834a48b1c73d295cd1334, type: 2}
+      objectReference: {fileID: 11400000, guid: bb739e44d38d27f45bada6b0de6083f5, type: 2}
     - target: {fileID: 902020612500908292, guid: 5de2b0bade98eb8499811aeb4bd6cad1, type: 3}
       propertyPath: startCards.Array.data[2]
       value: 
