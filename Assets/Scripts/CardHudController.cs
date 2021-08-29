@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using CallbackEvents;
 
 public class CardHudController : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class CardHudController : MonoBehaviour
         heldCards = new RawImage[numCards];
         selectedCard = -1;
         newCard.SetActive(false);
+        EventSystem.Current.RegisterEventListener<CardFailed>(OnCardFailed);
 
         for(int i = 0; i < numCards; i++)
         {
@@ -152,6 +154,22 @@ public class CardHudController : MonoBehaviour
                 heldCard.rectTransform.anchoredPosition = new Vector3(heldCard.rectTransform.anchoredPosition.x, currentY, 0f);
             }
 
+        }
+    }
+
+    private void OnCardFailed(CardFailed context)
+    {
+        for(int i = 0; i < heldCards.Length; i++)
+        {
+            var heldCard = heldCards[i];
+            var cardData = cardInventory.Cards[i];
+            if(cardData == context.CardObject)
+            {
+                heldCard.color = new Color(1, 0, 0);
+                EventSystem.Current.CallbackAfter(() => {
+                    heldCard.color = new Color(1, 1, 1);
+                }, 500);
+            }
         }
     }
 }
