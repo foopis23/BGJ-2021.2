@@ -5,7 +5,7 @@ using CallbackEvents;
 
 public class CardInventory
 {
-    public const float Chaosity = 0.05f;
+    public const float Chaosity = 0.2f;
 
     public CardObject[] Cards;
     public float TickSpeed;
