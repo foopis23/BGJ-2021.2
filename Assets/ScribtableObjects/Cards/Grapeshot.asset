@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7a8e7c2e3a13a429629d0d02502093, type: 3}
   m_Name: Grapeshot
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Grapeshot
   Icon: {fileID: 0}
-  ModifierNames: []
+  ModifierNames:
+  - bulletCount 2
+  - spread 1
