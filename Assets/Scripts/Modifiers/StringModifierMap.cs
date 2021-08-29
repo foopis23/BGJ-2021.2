@@ -24,7 +24,7 @@ namespace Modifiers
                 { "AttackTargetSpeed", typeof(AttackTargetSpeed)},
                 { "regenerationAmount", typeof(RegenerationAmount)},
                 { "attackTargetRegenerationAmount", typeof(AttackTargetRegenerationAmount)},
-                { "attackTargetDamageReduction", typeof(attackTargetDamageReduction)}
+                { "attackTargetDamageReduction", typeof(AttackTargetDamageReduction)}
             };
         }
 

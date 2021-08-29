@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7a8e7c2e3a13a429629d0d02502093, type: 3}
   m_Name: ArmorPlates
   m_EditorClassIdentifier: 
-  Name: 
-  Icon: {fileID: 0}
-  ModifierNames: []
+  Name: ArmorPlates
+  Icon: {fileID: 2800000, guid: 8af424caf3c094143ad09224d7659686, type: 3}
+  ModifierNames:
+  - damageReduction 2
+  - moveSpeed -1
