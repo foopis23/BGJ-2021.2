@@ -616,6 +616,7 @@ MonoBehaviour:
   heldCardsObject: {fileID: 2015021490}
   newCard: {fileID: 5783918875823111924}
   cardPrefab: {fileID: 2873760035241522824, guid: b3268ac2e48b74345a7f662dac7039ea, type: 3}
+  cardDeck: {fileID: 0}
 --- !u!1 &1650252862633889283
 GameObject:
   m_ObjectHideFlags: 0

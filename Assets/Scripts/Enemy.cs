@@ -14,6 +14,8 @@ public class Enemy : LivingEntity
     public Collider collider;
     public int corpseStayingPower = 30;
 
+    public GameObject[] itemDropPrefabs;
+    public float dropRate = 0.15f;
     public AudioSource attackSound;
     public AudioSource damageSound;
     public AudioSource deathSound;
@@ -68,12 +70,18 @@ public class Enemy : LivingEntity
         collider.enabled = false;
         
         animator.Play("death");
+
         deathSound.Play();
         
         EventSystem.Current.CallbackAfter(() =>
         {
             Destroy(gameObject);
         }, corpseStayingPower * 1000);
+
+        if (Random.Range(0.0f, 1.0f) <= dropRate)
+        {
+            Instantiate(itemDropPrefabs[Random.Range(0, itemDropPrefabs.Length)], transform.position, Quaternion.identity);
+        }
     }
 
     private void Attack()
