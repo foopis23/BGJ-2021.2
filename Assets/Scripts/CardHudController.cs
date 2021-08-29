@@ -17,6 +17,7 @@ public class CardHudController : MonoBehaviour
     public GameObject cardPrefab;
     public CardDeck cardDeck;
     public TMP_Text coinText;
+    public TMP_Text expiresIn;
 
     // private fields
     private CardInventory cardInventory;
@@ -67,6 +68,7 @@ public class CardHudController : MonoBehaviour
             newCard.gameObject.transform.Find("Info Text").GetComponent<TextMeshProUGUI>().text =
                 cardDeck.PurchasedCard.FlavorText;
             newCard.gameObject.transform.Find("Chaos Percent").GetComponent<TextMeshProUGUI>().text = ((int) (cardDeck.PurchasedCard.ChaosLevel * 100)).ToString() + "%";
+            expiresIn.text = $"Expires In: {(int) (cardDeck.cardExpireTime - (Time.time - cardDeck.LastBoughtCardTime))}";
         }
         else
         {
