@@ -131,7 +131,7 @@ MonoBehaviour:
   itemDropPrefabs:
   - {fileID: 2705714646578125970, guid: 0b270c58c83db304592dfa47c95ec58a, type: 3}
   - {fileID: 8936859013092367982, guid: 44f00e513ab7db24c8b7137fa09bbad6, type: 3}
-  dropRate: 0.15
+  dropRate: 0.3
   attackSound: {fileID: 8843692411800349951}
   damageSound: {fileID: 1788330081281214789}
   deathSound: {fileID: 2321215556794592085}
