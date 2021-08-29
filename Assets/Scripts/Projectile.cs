@@ -241,7 +241,6 @@ public class ExplosionEventContext : EventContext
         if (distance >= Range) return 0.0f;
         var rangeRt = Mathf.Sqrt(Range);
         var distanceRt = Mathf.Sqrt(distance);
-        Debug.Log($"MADE IT HERE {distance} : {((rangeRt - distanceRt) / (rangeRt + distanceRt)) * Damage}\nDamage: {Damage} Range: {Range}");
         return ((rangeRt - distanceRt) / (rangeRt + distanceRt)) * Damage;
     }
 }
