@@ -16,4 +16,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   ModifierNames:
   - bulletCount 2
-  - spread 1
+  - spread 3

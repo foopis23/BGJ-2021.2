@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CallbackEvents;
 
 public class ItemPickUp : MonoBehaviour
 {
@@ -27,7 +28,11 @@ public class ItemPickUp : MonoBehaviour
         {
             player.purchaseCardPoints += coins;
         }
+
+        EventSystem.Current.FireEvent(new CoinPickupContext());
         
         Destroy(wrapper);
     }
 }
+
+public class CoinPickupContext : EventContext {}

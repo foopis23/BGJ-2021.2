@@ -1,10 +1,11 @@
 ﻿using System;
 using Modifiers;
 using UnityEngine;
+using CallbackEvents;
 
 public class CardInventory
 {
-    public const float Chaosity = 0.01f;
+    public const float Chaosity = 0.05f;
 
     public CardObject[] Cards;
     public float TickSpeed;
@@ -64,6 +65,8 @@ public class CardInventory
         {
             modifier.Activate();
         }
+
+        EventSystem.Current.FireEvent(new CardActionContext());
     }
 
     private void ClearSlot(int slot)
@@ -102,3 +105,5 @@ public class CardInventory
         _lastTick = Time.time;
     }
 }
+
+public class CardActionContext : EventContext {}
