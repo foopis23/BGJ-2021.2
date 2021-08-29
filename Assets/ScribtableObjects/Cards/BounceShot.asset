@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BounceShot
   m_EditorClassIdentifier: 
   Name: Bounce Shot
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: a2032e2264d1a0d41974bce1bb854b7b, type: 3}
   ModifierNames:
   - bounces 2
   - spread -1

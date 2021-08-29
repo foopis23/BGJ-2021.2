@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IncendiaryRounds
   m_EditorClassIdentifier: 
   Name: Incendiary Rounds
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: a2032e2264d1a0d41974bce1bb854b7b, type: 3}
   ModifierNames:
   - fireDamage 2
   - bulletCount -1

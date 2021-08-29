@@ -16,5 +16,5 @@ MonoBehaviour:
   Icon: {fileID: 2800000, guid: a2032e2264d1a0d41974bce1bb854b7b, type: 3}
   ModifierNames:
   - bulletCount 3
-  - spread 2
+  - spread 4
   - pierces -2
