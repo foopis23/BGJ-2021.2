@@ -1,4 +1,5 @@
 using System;
+using CallbackEvents;
 using UnityEngine;
 using Modifiers;
 
@@ -27,4 +28,9 @@ public class CardObject : ScriptableObject
             FlavorText += $"{Modifiers[i].GetFlavorText()}\n";
         }
     }
+}
+
+public class CardFailed : EventContext
+{
+    public CardObject CardObject;
 }

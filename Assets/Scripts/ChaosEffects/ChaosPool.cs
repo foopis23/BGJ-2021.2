@@ -13,7 +13,7 @@ namespace ChaosEffects
         private static void Init()
         {
             _inited = true;
-            _onShootEffects = new IOnShootEffect[]{new ExplodeInFaceEffect(), new BurstIntoFlames(), new SlownessEffectOnShoot(), new PoisonedEffectOnShoot()};
+            _onShootEffects = new IOnShootEffect[]{new ExplodeInFaceEffect(), new BurstIntoFlames(), new SlownessEffectOnShoot(), new PoisonedEffectOnShoot(), new ExtraBounceEffect()};
             _onHitEffects = new IOnExpireEffect[] { new BurstIntoFlamesOnHit(), new SlownessEffectOnExpire(), new PoisonedEffectOnHit()};
             _onPassiveEffects = new IOnPassiveEffect[]{ new BurstIntoFlamesPassive(), new SlownessEffectOnPassive(), new PoisonedEffectOnPassive()};
             _onBeforeShootEffects = new IOnBeforeShootEffect[] { new ExplodeInFaceBeforeShoot(), new SlownessEffectBeforeShoot(), new BurstIntoFlameBeforeShoot(), new PoisonedEffectBeforeShoot() };

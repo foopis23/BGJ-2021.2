@@ -84,6 +84,7 @@ public class CardHudController : MonoBehaviour
                 {
                     cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
                     cardDeck.PurchasedCard = null;
+                    cardDeck.LastBoughtCardTime = -1.0f;
                 }
                 else
                 {
@@ -96,6 +97,7 @@ public class CardHudController : MonoBehaviour
                     {
                         cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
                         cardDeck.PurchasedCard = null;
+                        cardDeck.LastBoughtCardTime = -1.0f;
                     }
                 }
             }
