@@ -123,6 +123,10 @@ MonoBehaviour:
   animator: {fileID: 1670131772642602660}
   collider: {fileID: 8041126683582689483}
   corpseStayingPower: 20
+  itemDropPrefabs:
+  - {fileID: 2705714646578125970, guid: 0b270c58c83db304592dfa47c95ec58a, type: 3}
+  - {fileID: 8936859013092367982, guid: 44f00e513ab7db24c8b7137fa09bbad6, type: 3}
+  dropRate: 0.15
 --- !u!195 &3649290192713331920
 NavMeshAgent:
   m_ObjectHideFlags: 0

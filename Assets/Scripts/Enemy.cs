@@ -13,6 +13,9 @@ public class Enemy : LivingEntity
     [FormerlySerializedAs("Animator")] public Animator animator;
     public Collider collider;
     public int corpseStayingPower = 30;
+
+    public GameObject[] itemDropPrefabs;
+    public float dropRate = 0.15f;
     
     // private fields
     private NavMeshAgent _navMeshAgent;
@@ -62,11 +65,16 @@ public class Enemy : LivingEntity
         collider.enabled = false;
         
         animator.Play("death");
-        
+
         EventSystem.Current.CallbackAfter(() =>
         {
             Destroy(gameObject);
         }, corpseStayingPower * 1000);
+
+        if (Random.Range(0.0f, 1.0f) <= dropRate)
+        {
+            Instantiate(itemDropPrefabs[Random.Range(0, itemDropPrefabs.Length)], transform.position, Quaternion.identity);
+        }
     }
 
     private void Attack()
