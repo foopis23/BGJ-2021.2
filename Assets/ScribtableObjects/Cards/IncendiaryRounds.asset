@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7a8e7c2e3a13a429629d0d02502093, type: 3}
   m_Name: IncendiaryRounds
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Incendiary Rounds
   Icon: {fileID: 0}
-  ModifierNames: []
+  ModifierNames:
+  - fireDamage 2
+  - poisonDamage -2
+  - bulletCount -1
