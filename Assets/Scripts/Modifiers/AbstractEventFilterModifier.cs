@@ -14,7 +14,7 @@ namespace Modifiers
         {
             if (EventSystem.Current != null)
             {
-                EventSystem.Current.RegisterFilterListener<T>(OnTrigger);    
+                EventSystem.Current.UnregisterFilterListener<T>(OnTrigger);    
             }
         }
 
