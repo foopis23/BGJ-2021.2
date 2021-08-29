@@ -1,4 +1,5 @@
-﻿using ChaosEffects;
+﻿using CallbackEvents;
+using ChaosEffects;
 
 namespace Modifiers
 {
@@ -6,6 +7,7 @@ namespace Modifiers
     {
         protected override BeforeFireContext OnFailure(BeforeFireContext e)
         {
+            EventSystem.Current.FireEvent(new CardFailed(){CardObject = Card});
             ChaosPool.OnFail(e);
             return e;
         }
