@@ -31,10 +31,12 @@ public class EnemyDetection : MonoBehaviour
             !(Vector3.Distance(transform.position, col.gameObject.transform.position) <
               Vector3.Distance(transform.position, _enemy.aggroTarget.transform.position)))) return;
         
-        Physics.Raycast(transform.TransformPoint(_detectionCollider.center), col.gameObject.transform.position - transform.TransformPoint(_detectionCollider.center), out var hit, _detectionCollider.radius + 1);
-        if(hit.collider == col)
-        {
-            _enemy.aggroTarget = col.gameObject;
-        }
+        _enemy.aggroTarget = col.gameObject;
+        
+        // Physics.Raycast(transform.TransformPoint(_detectionCollider.center), col.gameObject.transform.position - transform.TransformPoint(_detectionCollider.center), out var hit, _detectionCollider.radius + 1);
+        // if(hit.collider == col)
+        // {
+        //     _enemy.aggroTarget = col.gameObject;
+        // }
     }
 }
