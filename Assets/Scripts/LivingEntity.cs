@@ -132,9 +132,7 @@ public abstract class LivingEntity : MonoBehaviour
                 toRemove.Add(_statusEffects.Keys.ToArray()[i]);
                 continue;
             }
-            
-            Debug.Log(i);
-            
+
             _statusEffects.Keys.ToArray()[i].StatFilter(this);
         }
 
@@ -146,7 +144,8 @@ public abstract class LivingEntity : MonoBehaviour
     
     private void ExplosionListener(ExplosionEventContext e)
     {
-        Damage(e.GetDamage(transform.position));
+        var damage = e.GetDamage(transform.position);
+        Damage(damage);
     }
 
     private void OnTickDamage(TickHealthContext e)

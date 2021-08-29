@@ -164,7 +164,7 @@ public class Projectile : MonoBehaviour
     {
         var expireCtx = EventSystem.Current.FireFilter<OnExpireContext>(new OnExpireContext(this, onHit) {ExplosionPower = baseExplosionPower});
         var explosionPower = Mathf.Max(expireCtx.ExplosionPower, 0);
-        
+
         if (explosionPower > 0) {
             EventSystem.Current.FireEvent(new ExplosionEventContext(explosionPower){Pos = transform.position});
         }
@@ -218,7 +218,7 @@ public class ExplosionEventContext : EventContext
 
     public ExplosionEventContext(int powerLevel)
     {
-        const float damageMultiplier = 3.0f;
+        const float damageMultiplier = 20.0f;
         const float rangeMultiplier = 3.0f;
         
         PowerLevel = powerLevel;
@@ -231,6 +231,8 @@ public class ExplosionEventContext : EventContext
         var distance = Vector3.Distance(Pos, entityPos);
         if (distance >= Range) return 0.0f;
         var rangeRt = Mathf.Sqrt(Range);
-        return (rangeRt - Mathf.Sqrt(Range)) / rangeRt * Damage;
+        var distanceRt = Mathf.Sqrt(distance);
+        Debug.Log($"MADE IT HERE {distance} : {((rangeRt - distanceRt) / (rangeRt + distanceRt)) * Damage}\nDamage: {Damage} Range: {Range}");
+        return ((rangeRt - distanceRt) / (rangeRt + distanceRt)) * Damage;
     }
 }
