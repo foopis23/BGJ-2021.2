@@ -23,6 +23,7 @@ namespace Weapons
         private bool _enabled = true;
         private float _queuedFireTime;
         private float _queuedReloadTime;
+        private ParticleSystem _shootParticle;
 
         public void Start()
         {
@@ -32,6 +33,7 @@ namespace Weapons
             equipAnimator.gameObject.SetActive(false);
             ammoText.text = _weapon.currentAmmo.ToString();
             shooter = GetComponent<LivingEntity>();
+            _shootParticle = GetComponentInChildren<ParticleSystem>();
             
             EventSystem.Current.RegisterEventListener<OnPlayerDeathContext>((e) => _enabled = false);
         }
@@ -57,6 +59,7 @@ namespace Weapons
                     shootAnimator.gameObject.SetActive(true);
                     equipAnimator.gameObject.SetActive(false);
                     shootAnimator.Play("shoot");
+                    _shootParticle.Play();
                     ammoText.text = _weapon.currentAmmo.ToString();
                     if(!_weapon.CanFire())
                     {

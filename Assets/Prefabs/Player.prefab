@@ -366,7 +366,7 @@ MonoBehaviour:
   playerMovement: {fileID: 1311247105997312320}
   inventorySize: 5
   passiveModifierTickSpeed: 20
-  startCard: {fileID: 11400000, guid: 798ae248b1de0d44eb775d443ab400cb, type: 2}
+  startCards: []
 --- !u!114 &1202004756380482706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,11 +1648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2977589295582011380, guid: 3a9c3de0ab13fdd4e91635df289308a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.425
+      value: 0.484
       objectReference: {fileID: 0}
     - target: {fileID: 2977589295582011380, guid: 3a9c3de0ab13fdd4e91635df289308a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.346
+      value: 1.328
       objectReference: {fileID: 0}
     - target: {fileID: 2977589295582011380, guid: 3a9c3de0ab13fdd4e91635df289308a0, type: 3}
       propertyPath: m_LocalRotation.w

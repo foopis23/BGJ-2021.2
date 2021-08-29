@@ -199,24 +199,26 @@ public class OnExpireContext : EventContext
 
 public class ExplosionEventContext : EventContext
 {
-    private readonly float _range;
-    private readonly float _damage;
+    public float Range;
+    public float Damage;
     public Vector3 Pos;
+    public int PowerLevel;
 
     public ExplosionEventContext(int powerLevel)
     {
         const float damageMultiplier = 3.0f;
         const float rangeMultiplier = 3.0f;
         
-        _damage = powerLevel * damageMultiplier;
-        _range = powerLevel * rangeMultiplier;
+        PowerLevel = powerLevel;
+        Damage = powerLevel * damageMultiplier;
+        Range = powerLevel * rangeMultiplier;
     }
 
     public float GetDamage(Vector3 entityPos)
     {
         var distance = Vector3.Distance(Pos, entityPos);
-        if (distance >= _range) return 0.0f;
-        var rangeRt = Mathf.Sqrt(_range);
-        return (rangeRt - Mathf.Sqrt(_range)) / rangeRt * _damage;
+        if (distance >= Range) return 0.0f;
+        var rangeRt = Mathf.Sqrt(Range);
+        return (rangeRt - Mathf.Sqrt(Range)) / rangeRt * Damage;
     }
 }

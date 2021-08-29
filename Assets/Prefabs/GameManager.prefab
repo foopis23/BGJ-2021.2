@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6610417371524059237}
   - component: {fileID: 6610417371524059238}
   - component: {fileID: 7160232375294520114}
+  - component: {fileID: 1384565621378252621}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -62,3 +63,16 @@ MonoBehaviour:
   poisonTickDamage: 2
   regenerationTickSpeed: 0.1
   statusEffectTickSpeed: 0.1
+--- !u!114 &1384565621378252621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6610417371524059239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1f114ed95b1d54ebb03192a0d4aaea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 5731776366842136644, guid: 41b905e373bbcd74dbb457c437054a34, type: 3}
