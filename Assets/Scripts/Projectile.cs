@@ -32,6 +32,7 @@ public class Projectile : MonoBehaviour
     private int _totalBounces;
     private int _totalPierces;
     private HashSet<int> _hitEnemies;
+    private ParticleSystem _trailParticle;
 
     private void Start()
     {
@@ -42,6 +43,11 @@ public class Projectile : MonoBehaviour
         AllHitEntities = new List<LivingEntity>();
 
         _hitEnemies ??= new HashSet<int>();
+
+        _trailParticle = GetComponentInChildren<ParticleSystem>();
+        var main = _trailParticle.main;
+        main.startSpeed = speed + 1;
+        _trailParticle.Play();
     }
 
     private void FixedUpdate()
