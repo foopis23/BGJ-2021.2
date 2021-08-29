@@ -51,6 +51,7 @@ public class Player : LivingEntity
         if (Time.time - _lastPassiveModifierTick >= passiveModifierTickSpeed)
         {
             EventSystem.Current.FireEvent(new OnPlayerPassiveModifierTick(this, Time.time - _lastPassiveModifierTick));
+            _lastPassiveModifierTick = Time.time;
         }
         Inventory.Update();
     }

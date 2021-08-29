@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using CallbackEvents;
 
 public class CardHudController : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class CardHudController : MonoBehaviour
     public CardDeck cardDeck;
     public TMP_Text coinText;
     public TMP_Text expiresIn;
+    public TMP_Text tutorialText;
+    private bool _hasStoredCard;
+    private bool _hasReplacedCard;
 
     // private fields
     private CardInventory cardInventory;
@@ -39,6 +43,8 @@ public class CardHudController : MonoBehaviour
         heldCards = new RawImage[numCards];
         selectedCard = -1;
         newCard.SetActive(false);
+        tutorialText.gameObject.SetActive(false);
+        EventSystem.Current.RegisterEventListener<CardFailed>(OnCardFailed);
 
         for(int i = 0; i < numCards; i++)
         {
@@ -69,9 +75,20 @@ public class CardHudController : MonoBehaviour
                 cardDeck.PurchasedCard.FlavorText;
             newCard.gameObject.transform.Find("Chaos Percent").GetComponent<TextMeshProUGUI>().text = ((int) (cardDeck.PurchasedCard.ChaosLevel * 100)).ToString() + "%";
             expiresIn.text = $"Expires In: {(int) (cardDeck.cardExpireTime - (Time.time - cardDeck.LastBoughtCardTime))}";
+
+            if (!_hasStoredCard)
+            {
+                tutorialText.text = "Press 1-5 to Equip Purchased Card";
+                tutorialText.gameObject.SetActive(true);
+            }else if (!_hasReplacedCard)
+            {
+                tutorialText.text = "Double tap 1-5 to Replace Card with Purchased Card";
+                tutorialText.gameObject.SetActive(true);
+            }
         }
         else
         {
+            tutorialText.gameObject.SetActive(false);
             newCard.SetActive(false);
         }
         foreach(KeyCode keyCode in KeyCodeCardIndices.Keys)
@@ -82,8 +99,12 @@ public class CardHudController : MonoBehaviour
 
                 if (cardDeck.PurchasedCard != null && cardIndex == selectedCard)
                 {
+                    _hasStoredCard = true;
+                    if (cardInventory.Cards[cardIndex] != null) _hasReplacedCard = true;
+                    
                     cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
                     cardDeck.PurchasedCard = null;
+                    cardDeck.LastBoughtCardTime = -1.0f;
                 }
                 else
                 {
@@ -94,8 +115,12 @@ public class CardHudController : MonoBehaviour
                     }
                     else if (cardDeck.PurchasedCard != null)
                     {
+                        _hasStoredCard = true;
+                        if (cardInventory.Cards[cardIndex] != null) _hasReplacedCard = true;
+                        
                         cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
                         cardDeck.PurchasedCard = null;
+                        cardDeck.LastBoughtCardTime = -1.0f;
                     }
                 }
             }
@@ -150,6 +175,22 @@ public class CardHudController : MonoBehaviour
                 heldCard.rectTransform.anchoredPosition = new Vector3(heldCard.rectTransform.anchoredPosition.x, currentY, 0f);
             }
 
+        }
+    }
+
+    private void OnCardFailed(CardFailed context)
+    {
+        for(int i = 0; i < heldCards.Length; i++)
+        {
+            var heldCard = heldCards[i];
+            var cardData = cardInventory.Cards[i];
+            if(cardData == context.CardObject)
+            {
+                heldCard.color = new Color(1, 0, 0);
+                EventSystem.Current.CallbackAfter(() => {
+                    heldCard.color = new Color(1, 1, 1);
+                }, 500);
+            }
         }
     }
 }

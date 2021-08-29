@@ -22,7 +22,7 @@ namespace Modifiers
         {
             var rand = Random.Range(0.0f, 1.0f);
 
-            if (rand > Card.ChaosLevel)
+            if (rand > Card.ChaosLevel / Card.Modifiers.Length)
             {
                 OnSuccess(e);
             }
