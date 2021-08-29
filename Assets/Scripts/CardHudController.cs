@@ -78,7 +78,8 @@ public class CardHudController : MonoBehaviour
                 heldCard.gameObject.SetActive(true);
                 heldCard.gameObject.transform.Find("Icon").GetComponent<RawImage>().texture = cardData.Icon;
                 heldCard.gameObject.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = cardData.Name;
-                heldCard.gameObject.transform.Find("Info Text").GetComponent<TextMeshProUGUI>().text = "poopie stinkyyy"; // TODO: set info text
+                heldCard.gameObject.transform.Find("Info Text").GetComponent<TextMeshProUGUI>().text =
+                    cardData.FlavorText;
                 heldCard.gameObject.transform.Find("Chaos Percent").GetComponent<TextMeshProUGUI>().text = ((int) (cardData.ChaosLevel * 100)).ToString() + "%";
             }
 

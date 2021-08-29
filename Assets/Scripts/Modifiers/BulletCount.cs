@@ -15,7 +15,7 @@
 
         public override string GetFlavorText()
         {
-            return $"Bullet Count ${Strength}: Increases the amount of bullets fired.";
+            return $"Bullet Count {Strength}: Increases the amount of bullets fired.";
         }
     }
 }
