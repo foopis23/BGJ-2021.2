@@ -11,7 +11,7 @@
 
         public override string GetFlavorText()
         {
-            return $"Spread {Strength}: Bullet Spread Angle.";
+            return $"Spread {Strength}: Bullet spread angle.";
         }
     }
 }

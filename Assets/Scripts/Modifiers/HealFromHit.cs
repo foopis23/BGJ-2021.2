@@ -12,7 +12,7 @@
 
         public override string GetFlavorText()
         {
-            return $"Life Drain ${Strength}: Drain health from all target hit.";
+            return $"Life Drain ${Strength}: Steal health from target on hit.";
         }
     }
 }

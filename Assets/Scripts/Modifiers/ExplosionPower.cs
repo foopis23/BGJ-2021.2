@@ -10,7 +10,7 @@
 
         public override string GetFlavorText()
         {
-            return $"Explosion Power {Strength}: Increases explosion power of projectile.";
+            return $"Explosion Power {Strength}: Changes explosion power of projectile.";
         }
     }   
 }
