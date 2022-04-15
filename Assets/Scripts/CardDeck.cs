@@ -8,6 +8,8 @@ public class CardDeck : MonoBehaviour
     public CardObject[] allCards;
     [NonSerialized] public CardObject PurchasedCard;
     [NonSerialized] public float LastBoughtCardTime;
+    
+    private Action _cancelCancelCallback;
 
     public void Start()
     {
@@ -24,10 +26,18 @@ public class CardDeck : MonoBehaviour
         PurchasedCard.Init();
         LastBoughtCardTime = Time.time;
         
-        CallbackEvents.EventSystem.Current.CallbackAfter(() =>
+        _cancelCancelCallback = CallbackEvents.EventSystem.Current.CallbackAfter(() =>
         {
             PurchasedCard = null;
             LastBoughtCardTime = -1.0f;
         }, (int) (cardExpireTime * 1000.0f));
+    }
+
+    public void TakePurchasedCard()
+    {
+        PurchasedCard = null;
+        LastBoughtCardTime = -1.0f;
+        _cancelCancelCallback?.Invoke();
+        _cancelCancelCallback = null;
     }
 }

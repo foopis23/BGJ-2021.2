@@ -103,8 +103,7 @@ public class CardHudController : MonoBehaviour
                     if (cardInventory.Cards[cardIndex] != null) _hasReplacedCard = true;
                     
                     cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
-                    cardDeck.PurchasedCard = null;
-                    cardDeck.LastBoughtCardTime = -1.0f;
+                    cardDeck.TakePurchasedCard();
                 }
                 else
                 {
@@ -119,8 +118,7 @@ public class CardHudController : MonoBehaviour
                         if (cardInventory.Cards[cardIndex] != null) _hasReplacedCard = true;
                         
                         cardInventory.Equip(cardDeck.PurchasedCard, cardIndex);
-                        cardDeck.PurchasedCard = null;
-                        cardDeck.LastBoughtCardTime = -1.0f;
+                        cardDeck.TakePurchasedCard();
                     }
                 }
             }
