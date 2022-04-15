@@ -12,11 +12,8 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HELLO");
         if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
-        
-        Debug.Log("world");
-        
+
         var player = other.GetComponent<Player>();
 
         if (health > 0)
