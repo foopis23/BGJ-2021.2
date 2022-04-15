@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.sextonsoftware.events": {
-      "version": "https://github.com/foopis23/Unity-Callback-Events.git#hotpatch-unregister",
+      "version": "https://github.com/foopis23/Unity-Callback-Events.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "b3fe11afc42a67d031c1f2dd564e78bff29c5b0f"
+      "hash": "291e3c73bf07c88818373c0b9692b76d30829c90"
     },
     "com.unity.collab-proxy": {
       "version": "1.7.1",
