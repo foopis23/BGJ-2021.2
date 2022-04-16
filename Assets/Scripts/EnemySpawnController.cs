@@ -15,6 +15,7 @@ public class EnemySpawnController : MonoBehaviour
     public float maxSpawnFrequency = 2.0f;
     public float timeTillMaxFrequency = 600.0f;
     public float maxSpawnDistance = 30f;
+    public float minSpawnDistance = 10f;
     
     // private field
     private bool _canSpawn;
@@ -55,8 +56,8 @@ public class EnemySpawnController : MonoBehaviour
 
         for (var i = 0; i < transform.childCount; i++)
         {
-            if (Vector3.Distance(player.transform.position, transform.GetChild(i).transform.position) <
-                maxSpawnDistance)
+            if (Vector3.Distance(player.transform.position, transform.GetChild(i).transform.position) < maxSpawnDistance
+                && Vector3.Distance(player.transform.position, transform.GetChild(i).transform.position) >= minSpawnDistance) 
             {
                 validLocations.Add(transform.GetChild(i));
             }
