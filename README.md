@@ -1,9 +1,10 @@
-# BGJ 2021.2
+# Temple of Chaos
+## Description
 This is our submission to Brackey's Game Jam 2021.2. Explore a temple manipulated by mysterious cards. Fight your way through the skeleton hordes while trying not to weave spells that make you explode.
 
 The majority of assets were made in house (Unfortunately, obtaining explosives isn't a very good idea, so not those).
 
-------Tutorial and Controls------
+## Tutorial and Controls
 
 Move with WASD
 
