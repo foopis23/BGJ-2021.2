@@ -27,6 +27,7 @@ public class EnemySpawnController : MonoBehaviour
         _canSpawn = true;
         player ??= GameObject.FindWithTag("Player");
         _startTime = Time.time;
+        _spawnFrequency = minSpawnFrequency;
         
         EventSystem.Current.RegisterEventListener<OnPlayerDeathContext>((e) =>
         {
@@ -36,10 +37,9 @@ public class EnemySpawnController : MonoBehaviour
 
     public void Update()
     {
-        if (_spawnFrequency < maxSpawnDistance)
+        if (Math.Abs(_spawnFrequency - maxSpawnFrequency) > 0.01)
         {
-            _spawnFrequency = Mathf.Lerp(minSpawnFrequency, maxSpawnFrequency, (Time.time - _startTime) /
-                                                                               timeTillMaxFrequency);
+            _spawnFrequency = Mathf.Lerp(minSpawnFrequency, maxSpawnFrequency, (Time.time - _startTime) / timeTillMaxFrequency);
         }
         
         if (!_canSpawn) return;
