@@ -114,6 +114,8 @@ public class CPMPlayer : MonoBehaviour
         _controller = GetComponent<CharacterController>();
 
         player = GetComponent<Player>();
+        xMouseSensitivity = PlayerPrefs.GetFloat("sensitivity", xMouseSensitivity);
+        yMouseSensitivity = PlayerPrefs.GetFloat("sensitivity", yMouseSensitivity);
     }
 
     private void Update()
