@@ -32,6 +32,6 @@ public class SettingsMenuController : IRouterController
 	public override void OnRouteEnter()
 	{
         audioSlider.value = PlayerPrefs.GetFloat("volume", 1f);
-        sensitivitySlider.value = PlayerPrefs.GetFloat("sensitivity", 50f);
+        sensitivitySlider.value = PlayerPrefs.GetFloat("sensitivity", 7f);
 	}
 }
